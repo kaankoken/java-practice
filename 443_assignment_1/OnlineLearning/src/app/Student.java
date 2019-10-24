@@ -1,12 +1,24 @@
 package app;
+public class Student implements IPerformance{
+    private String institution;
 
-public class Student implements IPerformance {
-    float b = 0;
+    public Student() {
+
+    }
+
     public float credit() {
-        return b;
+        return (float)1;
     }
 
     public float monthlyFee() {
-        return b;
+        return (float)1;
+    }
+
+    public String getInstitution() {
+        return this.institution;
+    }
+
+    public void setInstitution(String inst) {
+        this.institution = inst;
     }
 }
