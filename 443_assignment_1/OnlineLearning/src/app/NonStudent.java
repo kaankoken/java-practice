@@ -1,10 +1,22 @@
 package app;
-public class NonStudent implements IPerformance {   
+
+import java.util.*;
+import app.Trainee;
+public class NonStudent extends Trainee implements IPerformance {   
     private String job;
     private String position;
 
     public NonStudent() {
-        
+        super();
+        this.job = "";
+        this.position = "";
+    }
+
+    public NonStudent(String name, char gender, int age, String email, String password,
+            Boolean premium, List<Course> enrolled, String job, String position) {
+        super(name, gender, age, email, password, premium, enrolled);
+        this.job = job;
+        this.position = position;
     }
 
     public float credit() {

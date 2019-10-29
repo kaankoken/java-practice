@@ -8,7 +8,25 @@ public abstract class Person {
     private String password;
 
     public Person() {
+        this.name = "";
+        this.gender = '0';
+        this.age = 0;
+        this.email = "";
+        this.password = "";
+    }
 
+    public Person(String n, char g, int a) {
+        this.name = n;
+        this.gender = g;
+        this.age = a;
+    }
+
+    public Person(String n, char g, int a, String e, String p) {
+        this.name = n;
+        this.gender = g;
+        this.age = a;
+        this.email = e;
+        this.password = p;
     }
 
     public String getName() {

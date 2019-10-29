@@ -1,16 +1,26 @@
 package app;
-import java.util.ArrayList;
-import app.Course;
 
-public class Trainee {
-    private ArrayList<Course> enrolled;
+import java.util.*;
+import app.Course;
+import app.Person;
+public class Trainee extends Person {
+    private List<Course> enrolled;
     private Boolean premium;
 
     public Trainee() {
+        super();
         this.enrolled = new ArrayList<Course>();
+        this.premium = false;
     }
 
-    public ArrayList<Course> getCourses() {
+    public Trainee(String name, char gender, int age, String email,
+        String password, Boolean premium, List<Course> enrolled) {
+        super(name, gender, age, email, password);
+        this.enrolled = enrolled;
+        this.premium = premium;
+    }
+
+    public List<Course> getCourses() {
         return this.enrolled;
     }
 

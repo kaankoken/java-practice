@@ -1,9 +1,19 @@
 package app;
-public class Student implements IPerformance{
+
+import java.util.*;
+import app.Trainee;
+public class Student extends Trainee implements IPerformance{
     private String institution;
 
     public Student() {
+        super();
+        this.institution = "";
+    }
 
+    public Student(String name, char gender, int age, String email, String password,
+        Boolean premium, List<Course> enrolled, String institution) {
+        super(name, gender, age, email, password, premium, enrolled);
+        this.institution = institution;
     }
 
     public float credit() {
