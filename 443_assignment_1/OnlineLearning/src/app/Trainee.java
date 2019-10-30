@@ -13,18 +13,11 @@ public class Trainee extends Person {
         this.premium = false;
     }
 
-    public Trainee(String name, char gender, 
-        int age, String email, String password) {
-            super(name, gender, age, email, password);
-            this.enrolled = new ArrayList<>();
-            this.premium = false;
-    }
-
     public Trainee(String name, char gender, int age, String email,
         String password, Boolean premium, List<Course> enrolled) {
-            super(name, gender, age, email, password);
-            this.enrolled = enrolled;
-            this.premium = premium;
+        super(name, gender, age, email, password);
+        this.enrolled = enrolled;
+        this.premium = premium;
     }
 
     public List<Course> getCourses() {
