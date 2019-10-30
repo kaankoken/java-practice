@@ -9,20 +9,27 @@ public class MockData<T> {
         this.temp =  new ArrayList<T>();
     }
 
-    public void generateMockData(String type) {
-        if (type == "Course") {
-            this.temp.add((T) new Course(
-                new Instructor(1, "name1", 'F', 12),
-                "course1",
-                (float) 52.1,
-                false
-            ));
-        }
-        else if (type == "Trainee") {
-            System.out.println("x1");
-        }
-        else {
-            System.out.println("x2");
+    public void generateMockData(String type, int size) {
+        for (int i = 0; i < size; i++) {
+            if (type == "Course") { 
+                this.temp.add((T) new Course(
+                    new Instructor(i, "name" + i, 'F', 12 + i),
+                    "course" + i,
+                    (float) (52.1 + i),
+                    false
+                ));
+            }
+            else if (type == "Trainee") {
+                this.temp.add((T) new Trainee(
+                    "name" + i,
+                    'f',
+                    12 + i,
+                    "email" + i,
+                    "password" + i));
+            }
+            else {
+                this.temp.add((T) new Instructor(i, "n" + i, 'f', 15 + i));
+            }
         }
     }
 
