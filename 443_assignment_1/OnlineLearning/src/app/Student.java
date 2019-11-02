@@ -3,6 +3,7 @@ package app;
 import java.util.*;
 import app.Trainee;
 public class Student extends Trainee implements IPerformance{
+    final float creditMultiplier = (float)0.8;
     private String institution;
 
     public Student() {
@@ -17,6 +18,7 @@ public class Student extends Trainee implements IPerformance{
     }
 
     public float credit() {
+        //count the number of premium courses
         return (float)1;
     }
 

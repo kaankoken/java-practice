@@ -2,7 +2,8 @@ package app;
 
 import java.util.*;
 import app.Trainee;
-public class NonStudent extends Trainee implements IPerformance {   
+public class NonStudent extends Trainee implements IPerformance {
+    final float creditMultiplier= (float)0.4;
     private String job;
     private String position;
 
