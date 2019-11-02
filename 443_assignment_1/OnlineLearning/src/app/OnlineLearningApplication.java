@@ -64,14 +64,15 @@ public class OnlineLearningApplication extends ErrorHandling {
                         traineeList.add(isNullSignUp);
                     System.out.println();
                 } while (isNullSignUp == null);
-                
-                //this.login();
-                break;
             case "2":
-                //this.login();
-                System.out.println("Hello Java2");
+                boolean result;
+                do {
+                    result = this.login(this.trainee);
+                    System.out.println();
+                } while (result == false);
                 break;
             default:
+                System.out.println("Not a valid option");
                 break;
         }
     }
@@ -104,8 +105,24 @@ public class OnlineLearningApplication extends ErrorHandling {
         return newTrainee;
     }
 
-    public boolean login() {
+    public boolean login(List<Trainee> traineeList) {
+        Scanner input =  new Scanner(System.in);
 
+        System.out.println("Please Enter Login Informations");
+        System.out.print("Email: ");
+        String email = input.nextLine();
+        
+        System.out.print("Password: ");
+        String pass = input.nextLine();
+
+        boolean state = this.authenticate(traineeList, pass, email);
+
+        if (state == true) {
+            System.out.println("Login is succesful");
+            return true;
+        }
+        System.out.println("Login is failed. Please try again");
+        return false;
     }
 // 
     // public Trainee addCourse() {
