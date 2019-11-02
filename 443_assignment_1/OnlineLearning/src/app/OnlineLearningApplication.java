@@ -1,43 +1,50 @@
 package app;
 
-import java.util.*;
-import app.Instructor;
-import app.Trainee;
+import java.util.List;
+import java.util.Scanner;
 import app.Course;
-import app.MockData;
+import app.Trainee;
+import app.Instructor;
+import app.ErrorHandling;
+
 /**
  * @author Kaan Taha Köken
- * @see <a href="https://github.com/kaankoken/java-practice/tree/master/443_assignment_1">Github</a>
+ * @see <a href=
+ *      "https://github.com/kaankoken/java-practice/tree/master/443_assignment_1">Github</a>
  */
 
-public class OnlineLearningApplication {
+public class OnlineLearningApplication extends ErrorHandling {
     public List<Instructor> instructors;
     public List<Trainee> trainee;
     public List<Course> courses;
 
     public OnlineLearningApplication() {
+        super();
         MockData<Course> mockCourse = new MockData<>();
         mockCourse.generateMockData("Course", 5);
-        this.courses =  mockCourse.getData();
+        this.courses = mockCourse.getData();
 
         MockData<Trainee> mockTrainee = new MockData<>();
         mockTrainee.generateMockData("Trainee", 6);
         this.trainee = mockTrainee.getData();
-        
+
         MockData<Instructor> mockInstructor = new MockData<>();
         mockInstructor.generateMockData("Instructor", 3);
         this.instructors = mockInstructor.getData();
     }
+
     public static void main(String[] args) throws Exception {
-        OnlineLearningApplication app = new OnlineLearningApplication();
-        //app.menu();
-        
-        for (int i = 0; i < app.courses.size(); i++) {
-            System.out.println(app.courses.get(i).courseName);
-        }
+
+        OnlineLearningApplication application = new OnlineLearningApplication();
+
+        application.menu(application.trainee);
+
+        // for (int i = 0; i < app.courses.size(); i++) {
+        // System.out.println(app.courses.get(i).courseName);
+        // }
     }
 
-    public void menu() {        
+    public void menu(List<Trainee> traineeList) {
         String option;
 
         System.out.println("**Welcome To Online Learning Platform**");
@@ -49,8 +56,15 @@ public class OnlineLearningApplication {
         
         switch (option) {
             case "1":
-                System.out.println("Hello Java");
-                this.signup();
+                Trainee isNullSignUp;
+                
+                do {
+                    isNullSignUp = this.signup();
+                    if (isNullSignUp != null)
+                        traineeList.add(isNullSignUp);
+                    System.out.println();
+                } while (isNullSignUp == null);
+                
                 //this.login();
                 break;
             case "2":
@@ -71,28 +85,28 @@ public class OnlineLearningApplication {
 
         System.out.print("Age: ");
         newTrainee.setAge(input.nextInt());
-
+        input.nextLine();
         System.out.print("Gender (F/M): ");
-        String temp = input.nextLine().toUpperCase();
-        newTrainee.setGender('f');
+        newTrainee.setGender(input.nextLine().charAt(0));
 
         System.out.print("Email: ");
         newTrainee.setEmail(input.nextLine());
 
         System.out.print("Password: ");
         newTrainee.setPassword(input.nextLine());
-
-        if (newTrainee.getAge() == 0 || newTrainee.getEmail() == "" || newTrainee.getGender() == '0' || newTrainee.getName() == "" || newTrainee.getPassword() == "") {
-            System.out.println("One of the fields is empty");
+        
+        boolean isEmpty = this.isEmpty(newTrainee);
+        if (isEmpty == false) {
+            System.out.print("Atleast one field is empty" + "\n" + "Please re-try to Signup");
             return null;
-        }    
-        System.out.println(newTrainee);
+        }
+        //System.out.println(newTrainee.getName());
         return newTrainee;
     }
 
-    // public Boolean login() {
-// 
-    // }
+    public boolean login() {
+
+    }
 // 
     // public Trainee addCourse() {
 // 
