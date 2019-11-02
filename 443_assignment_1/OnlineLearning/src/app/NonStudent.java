@@ -13,7 +13,7 @@ public class NonStudent extends Trainee implements IPerformance {
     }
 
     public NonStudent(String name, char gender, int age, String email, String password,
-            Boolean premium, List<Course> enrolled, String job, String position) {
+            boolean premium, List<Course> enrolled, String job, String position) {
         super(name, gender, age, email, password, premium, enrolled);
         this.job = job;
         this.position = position;

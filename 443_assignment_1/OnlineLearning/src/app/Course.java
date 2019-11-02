@@ -4,7 +4,7 @@ public class Course {
     public Instructor instructor;
     public String courseName;
     public float duration;
-    public Boolean premium;
+    public boolean premium;
 
     public Course() {
         this.instructor =  new Instructor();
@@ -13,7 +13,7 @@ public class Course {
         this.premium = false;
     }
 
-    public Course (Instructor instructor, String courseName, float duration, Boolean premium) {
+    public Course (Instructor instructor, String courseName, float duration, boolean premium) {
         this.courseName = courseName;
         this.duration = duration;
         this.premium = premium;

@@ -11,7 +11,7 @@ public class Student extends Trainee implements IPerformance{
     }
 
     public Student(String name, char gender, int age, String email, String password,
-        Boolean premium, List<Course> enrolled, String institution) {
+        boolean premium, List<Course> enrolled, String institution) {
         super(name, gender, age, email, password, premium, enrolled);
         this.institution = institution;
     }

@@ -5,7 +5,7 @@ import app.Course;
 import app.Person;
 public class Trainee extends Person {
     private List<Course> enrolled;
-    private Boolean premium;
+    private boolean premium;
 
     public Trainee() {
         super();
@@ -21,7 +21,7 @@ public class Trainee extends Person {
     }
 
     public Trainee(String name, char gender, int age, String email,
-        String password, Boolean premium, List<Course> enrolled) {
+        String password, boolean premium, List<Course> enrolled) {
             super(name, gender, age, email, password);
             this.enrolled = enrolled;
             this.premium = premium;
@@ -31,7 +31,7 @@ public class Trainee extends Person {
         return this.enrolled;
     }
 
-    public Boolean getPremium() {
+    public boolean getPremium() {
         return this.premium;
     }
 
@@ -39,7 +39,7 @@ public class Trainee extends Person {
         this.enrolled.add(c);
     }
 
-    public void setPremium(Boolean pre) {
+    public void setPremium(boolean pre) {
         this.premium = pre;
     }
     
