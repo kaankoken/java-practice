@@ -45,14 +45,12 @@ public class OnlineLearningApplication extends ErrorHandling {
     }
 
     public void menu(List<Trainee> traineeList) {
-        String option;
-
         System.out.println("**Welcome To Online Learning Platform**");
         System.out.println("Menu\n" + "(1)Signup\n" + "(2)Login");
         System.out.print("Your Choice: ");
         
         Scanner readInput = new Scanner(System.in);
-        option = readInput.nextLine();
+        String option = readInput.nextLine();
         
         switch (option) {
             case "1":
@@ -70,7 +68,13 @@ public class OnlineLearningApplication extends ErrorHandling {
                     result = this.login(this.trainee);
                     System.out.println();
                 } while (result == false);
+    
+                do {
+                    this.subMenu();
+                } while (result == false);
                 break;
+            case "3":
+                System.out.println("Exit");
             default:
                 System.out.println("Not a valid option");
                 break;
@@ -124,8 +128,15 @@ public class OnlineLearningApplication extends ErrorHandling {
         System.out.println("Login is failed. Please try again");
         return false;
     }
+
+    // public Trainee addCourse(Trainee person) {
+        // Scanner input = new Scanner(System.in);
 // 
-    // public Trainee addCourse() {
+        // System.out.print("Would you like to list the courses (Y/n): ");
+        // char stat = input.nextLine().charAt(0);
+// 
+        // if (stat == 'y')
+            // listAllCourses(person.getPremium());
 // 
     // }
 // 
@@ -141,9 +152,15 @@ public class OnlineLearningApplication extends ErrorHandling {
 // 
     // }
 // 
-    // public void listAllCourses() {
-// 
-    // }
+    public void listAllCourses(boolean premiumStat) {
+        for (Course course : this.courses) {
+            if (course.premium == premiumStat) {
+                System.out.println("Course Name: " + course.courseName);
+                System.out.println("Duration : " + course.duration);
+                System.out.println("Instructor: " + course.instructor.getName());
+            }
+        }
+    }   
 // 
     // public void listEnrolledCourses() {
 // 
@@ -156,4 +173,28 @@ public class OnlineLearningApplication extends ErrorHandling {
     // public void exit() {
         // 
     // }
+
+    public boolean subMenu() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("(1)List All Courses");
+        System.out.println("(2)Add Course");
+        
+        String option = input.nextLine();
+        switch (option) {
+            case "1":
+                this.listAllCourses(false);
+                break;
+            case "2":
+                //this.addCourse
+                break;
+            case "3":
+                System.out.println("Logging out!!!");
+                return true;
+            default:
+                System.out.println("Not a valid option");
+                break;
+        }
+        return false;
+    }
 }
