@@ -28,7 +28,6 @@ public class ErrorHandling {
 
     public boolean authenticate(List<Trainee> input, String Pass, String Email) {
         for(Trainee t: input) {
-            System.out.println(t.getEmail() + " " + t.getPassword());
             if (t.getEmail().equals(Email) && t.getPassword().equals(Pass)) {
                 return true;
             }
