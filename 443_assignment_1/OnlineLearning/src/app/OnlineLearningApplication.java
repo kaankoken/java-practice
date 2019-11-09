@@ -1,6 +1,7 @@
 package app;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import app.Course;
 import app.Trainee;
@@ -49,7 +50,6 @@ public class OnlineLearningApplication extends ErrorHandling {
     }
 
     public static void main(String[] args) throws Exception {
-
         OnlineLearningApplication application = new OnlineLearningApplication();
 
         application.menu(application.trainee);
@@ -122,11 +122,10 @@ public class OnlineLearningApplication extends ErrorHandling {
         boolean isEmpty = this.isEmpty(newTrainee);
         if (isEmpty == false) {
             System.out.print("Atleast one field is empty" + "\n" + "Please re-try to Signup");
-            input.close();
+
             return null;
         }
         //System.out.println(newTrainee.getName());
-        input.close();
         return newTrainee;
     }
 
@@ -144,11 +143,9 @@ public class OnlineLearningApplication extends ErrorHandling {
 
         if (state == true) {
             System.out.println("Login is succesful");
-            input.close();
             return true;
         }
         System.out.println("Login is failed. Please try again");
-        input.close();
         return false;
     }
 
@@ -222,6 +219,5 @@ public class OnlineLearningApplication extends ErrorHandling {
                     break;
             }
         } while (condition == true);
-        input.close();
     }
 }
