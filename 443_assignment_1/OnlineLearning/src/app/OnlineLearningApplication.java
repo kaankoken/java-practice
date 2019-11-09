@@ -80,13 +80,14 @@ public class OnlineLearningApplication extends ErrorHandling {
                     } while (isNullSignUp == null);
                     break;
                 case "2":
+                    Trainee person = new Trainee();
                     boolean result;
                     do {
-                        result = this.login(this.trainee);
+                        result = this.login(this.trainee, person);
                         System.out.println();
                     } while (result == false);
                     
-                    this.subMenu();
+                    this.subMenu(person);
                     break;
                 case "3":
                     System.out.println("Exiting from the system. Goodbye!!!");
@@ -134,7 +135,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         return newTrainee;
     }
 
-    public boolean login(List<Trainee> traineeList) {
+    public boolean login(List<Trainee> traineeList, Trainee person) {
         Scanner input =  new Scanner(System.in);
 
         System.out.println("Please Enter Login Informations");
@@ -144,13 +145,15 @@ public class OnlineLearningApplication extends ErrorHandling {
         System.out.print("Password: ");
         String pass = input.nextLine();
 
-        boolean state = this.authenticate(traineeList, pass, email);
+        Trainee p = this.authenticate(traineeList, pass, email);
 
-        if (state == true) {
+        if (p != null) {
             System.out.println("Login is succesful");
+            this.updateTrainee(p, person);
             return true;
         }
         System.out.println("Login is failed. Please try again\n");
+        person = null;
         return false;
     }
 
@@ -173,10 +176,28 @@ public class OnlineLearningApplication extends ErrorHandling {
 // 
     // }
 // 
-    // public Trainee changeToPremium() {
-// 
-    // }
-// 
+    public Trainee changeToPremium(Trainee person) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Would you like to change your account to premium?");
+        System.out.print("Your Choice (Y/N): ");
+        
+        char choice = input.nextLine().charAt(0); 
+        
+        if (choice == 'y') {
+            if (person.getPremium() == true)
+                System.out.println("Your account has already premium!!!\n");
+            else {
+                person.setPremium(true);
+                System.out.println("Account has been changed to premium!!!\n");
+            }
+ 
+        }
+        else
+            System.out.println("Operation is cancelled!!!\n");
+        return person;
+    }
+
     public void listAllCourses(boolean premiumStat) {
         for (Course course : this.courses) {
             if (course.premium == premiumStat) {
@@ -204,12 +225,12 @@ public class OnlineLearningApplication extends ErrorHandling {
         return false;
     }
 
-    public void subMenu() {
+    public void subMenu(Trainee person) {
         Scanner input = new Scanner(System.in);
         boolean condition = true;
 
         do {
-            System.out.println("(1)List All Courses\n" + "(2)Add Course\n" + "(3)Logout");
+            System.out.println("(1)List All Courses\n" + "(2)Add Course\n" + "(3)Change Account Type\n" + "(4)Logout");
             System.out.print("Your Choice: ");
             String option = input.nextLine();
 
@@ -221,6 +242,9 @@ public class OnlineLearningApplication extends ErrorHandling {
                     //this.addCourse
                     break;
                 case "3":
+                    this.changeToPremium(person);
+                    break;
+                case "4":
                     System.out.println("Logging out!!!\n");
                     condition = this.logout();
                     break;
