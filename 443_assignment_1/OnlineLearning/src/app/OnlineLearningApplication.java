@@ -52,10 +52,6 @@ public class OnlineLearningApplication extends ErrorHandling {
         OnlineLearningApplication application = new OnlineLearningApplication();
 
         application.menu(application.trainee);
-
-        // for (int i = 0; i < app.courses.size(); i++) {
-        // System.out.println(app.courses.get(i).courseName);
-        // }
     }
 
     public void menu(List<Trainee> traineeList) {       
@@ -122,13 +118,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         
         boolean isEmpty = this.isEmpty(newTrainee);
         if (isEmpty == false) {
-            System.out.print("Atleast one field is empty\n" + "Please re-try to Signup");
+            System.out.print("Atleast one field is empty\n" + "Please re-try to Signup\n");
             return null;
         }
 
         boolean isExist = this.isExist(newTrainee.getEmail(), this.trainee);
         if (isExist == true) {
-            System.out.println("This email is already in use\n" + "Please try again with different email");
+            System.out.println("This email is already in use\n" + "Please try again with different email\n");
             return null;
         }
         //System.out.println(newTrainee.getName());
@@ -148,7 +144,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         Trainee p = this.authenticate(traineeList, pass, email);
 
         if (p != null) {
-            System.out.println("Login is succesful");
+            System.out.println("Login is succesfull\n");
             this.updateTrainee(p, person);
             return true;
         }
@@ -172,10 +168,22 @@ public class OnlineLearningApplication extends ErrorHandling {
 // 
     // }
 // 
-    // public void getInstructorDetails() {
-// 
-    // }
-// 
+    public void getInstructorDetails(int ID, List<Instructor> instructorList) {
+        boolean status = false;
+        for (Instructor i: instructorList) {
+            if (i.getId() == ID) {
+                System.out.println("Instructor Name: " + i.getName());
+                System.out.println("Age : " + i.getAge());
+                System.out.println("Gender: " + i.getGender() +"\n");
+                status = true;
+            }
+        }
+
+        if (status == false) {
+            System.out.println("ID of the instructor did not match please try again!!!\n");
+        }
+    }
+
     public Trainee changeToPremium(Trainee person) {
         Scanner input = new Scanner(System.in);
 
@@ -231,7 +239,8 @@ public class OnlineLearningApplication extends ErrorHandling {
         boolean condition = true;
 
         do {
-            System.out.println("(1)List All Courses\n" + "(2)Add Course\n" + "(3)Change Account Type\n" + "(4)Logout");
+            System.out.println("(1)List All Courses\n" + "(2)Add Course\n"
+            + "(3)Get Instructor\n(4)Change Account Type\n" + "(5)Logout");
             System.out.print("Your Choice: ");
             String option = input.nextLine();
 
@@ -243,9 +252,16 @@ public class OnlineLearningApplication extends ErrorHandling {
                     //this.addCourse
                     break;
                 case "3":
-                    this.changeToPremium(person);
+                    this.listInstructor(this.instructors);
+                    System.out.print("Your Choice: ");
+                    int id = input.nextInt();
+                    this.getInstructorDetails(id, this.instructors);
+                    input.nextLine();
                     break;
                 case "4":
+                    this.changeToPremium(person);
+                    break;
+                case "5":
                     System.out.println("Logging out!!!\n");
                     condition = this.logout(person, this.trainee);
                     break;
