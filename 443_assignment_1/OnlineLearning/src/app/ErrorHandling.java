@@ -2,7 +2,7 @@ package app;
 
 import java.util.List;
 import app.Trainee;
-
+import app.Course;
 public class ErrorHandling {
     public boolean isEmpty(Trainee input) {
         if (input.getName().length() <= 1)
@@ -34,12 +34,24 @@ public class ErrorHandling {
         return false;
     }
 
-    public boolean authenticate(List<Trainee> input, String Pass, String Email) {
+    public Trainee authenticate(List<Trainee> input, String Pass, String Email) {
         for(Trainee t: input) {
             if (t.getEmail().equals(Email) && t.getPassword().equals(Pass)) {
-                return true;
+                return t;
             }
         }
-        return false;
+        return null;
+    }
+
+    public void updateTrainee(Trainee src, Trainee dest) {
+        dest.setAge(src.getAge());
+        dest.setEmail(src.getEmail());
+        dest.setGender(src.getGender());
+        dest.setName(src.getName());
+        dest.setPassword(src.getPassword());
+        dest.setPremium(src.getPremium());
+
+        for (Course c: src.getCourses())
+            dest.setCourses(c);
     }
 }
