@@ -44,41 +44,44 @@ public class OnlineLearningApplication extends ErrorHandling {
         // }
     }
 
-    public void menu(List<Trainee> traineeList) {
-        System.out.println("**Welcome To Online Learning Platform**");
-        System.out.println("Menu\n" + "(1)Signup\n" + "(2)Login");
-        System.out.print("Your Choice: ");
-        
+    public void menu(List<Trainee> traineeList) {       
         Scanner readInput = new Scanner(System.in);
-        String option = readInput.nextLine();
-        
-        switch (option) {
-            case "1":
-                Trainee isNullSignUp;
-                
-                do {
-                    isNullSignUp = this.signup();
-                    if (isNullSignUp != null)
-                        traineeList.add(isNullSignUp);
-                    System.out.println();
-                } while (isNullSignUp == null);
-            case "2":
-                boolean result;
-                do {
-                    result = this.login(this.trainee);
-                    System.out.println();
-                } while (result == false);
-    
-                do {
+        boolean condition = true;
+
+        do {
+            System.out.println("**Welcome To Online Learning Platform**");
+            System.out.println("Menu\n" + "(1)Signup\n" + "(2)Login\n" + "(3)Exit");
+            System.out.print("Your Choice: ");
+            String option = readInput.nextLine();
+
+            switch (option) {
+                case "1":
+                    Trainee isNullSignUp;
+                    
+                    do {
+                        isNullSignUp = this.signup();
+                        if (isNullSignUp != null)
+                            traineeList.add(isNullSignUp);
+                        System.out.println();
+                    } while (isNullSignUp == null);
+                case "2":
+                    boolean result;
+                    do {
+                        result = this.login(this.trainee);
+                        System.out.println();
+                    } while (result == false);
+                    
                     this.subMenu();
-                } while (result == false);
-                break;
-            case "3":
-                System.out.println("Exit");
-            default:
-                System.out.println("Not a valid option");
-                break;
-        }
+                    break;
+                case "3":
+                    System.out.println("Exiting from the system. Goodbye!!!");
+                    condition = this.exit();
+                    break;
+                default:
+                    System.out.println("Not a valid option");
+                    break;
+            }
+        } while (condition == true);
     }
 
     public Trainee signup() {
@@ -166,35 +169,38 @@ public class OnlineLearningApplication extends ErrorHandling {
 // 
     // }
 // 
-    // public void logout() {
-// 
-    // }
-// 
-    // public void exit() {
-        // 
-    // }
-
-    public boolean subMenu() {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("(1)List All Courses");
-        System.out.println("(2)Add Course");
-        
-        String option = input.nextLine();
-        switch (option) {
-            case "1":
-                this.listAllCourses(false);
-                break;
-            case "2":
-                //this.addCourse
-                break;
-            case "3":
-                System.out.println("Logging out!!!");
-                return true;
-            default:
-                System.out.println("Not a valid option");
-                break;
-        }
+    public boolean logout() {
         return false;
+    }
+
+    public boolean exit() {
+        return false;
+    }
+
+    public void subMenu() {
+        Scanner input = new Scanner(System.in);
+        boolean condition = true;
+
+        do {
+            System.out.println("(1)List All Courses\n" + "(2)Add Course\n" + "(3)Logout");
+            System.out.print("Your Choice: ");
+            String option = input.nextLine();
+
+            switch (option) {
+                case "1":
+                    this.listAllCourses(false);
+                    break;
+                case "2":
+                    //this.addCourse
+                    break;
+                case "3":
+                    System.out.println("Logging out!!!");
+                    condition = this.logout();
+                    break;
+                default:
+                    System.out.println("Not a valid option");
+                    break;
+            }
+        } while (condition == true);
     }
 }
