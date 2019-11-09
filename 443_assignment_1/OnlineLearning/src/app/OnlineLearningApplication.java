@@ -1,7 +1,6 @@
 package app;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 import app.Course;
 import app.Trainee;
@@ -62,9 +61,9 @@ public class OnlineLearningApplication extends ErrorHandling {
     public void menu(List<Trainee> traineeList) {       
         Scanner readInput = new Scanner(System.in);
         boolean condition = true;
+        System.out.println("**Welcome To Online Learning Platform**");
 
         do {
-            System.out.println("**Welcome To Online Learning Platform**");
             System.out.println("Menu\n" + "(1)Signup\n" + "(2)Login\n" + "(3)Exit");
             System.out.print("Your Choice: ");
             String option = readInput.nextLine();
@@ -79,6 +78,7 @@ public class OnlineLearningApplication extends ErrorHandling {
                             traineeList.add(isNullSignUp);
                         System.out.println();
                     } while (isNullSignUp == null);
+                    break;
                 case "2":
                     boolean result;
                     do {
@@ -121,8 +121,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         
         boolean isEmpty = this.isEmpty(newTrainee);
         if (isEmpty == false) {
-            System.out.print("Atleast one field is empty" + "\n" + "Please re-try to Signup");
+            System.out.print("Atleast one field is empty\n" + "Please re-try to Signup");
+            return null;
+        }
 
+        boolean isExist = this.isExist(newTrainee.getEmail(), this.trainee);
+        if (isExist == true) {
+            System.out.println("This email is already in use\n" + "Please try again with different email");
             return null;
         }
         //System.out.println(newTrainee.getName());
@@ -145,7 +150,7 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("Login is succesful");
             return true;
         }
-        System.out.println("Login is failed. Please try again");
+        System.out.println("Login is failed. Please try again\n");
         return false;
     }
 
@@ -177,15 +182,20 @@ public class OnlineLearningApplication extends ErrorHandling {
             if (course.premium == premiumStat) {
                 System.out.println("Course Name: " + course.courseName);
                 System.out.println("Duration : " + course.duration);
-                System.out.println("Instructor: " + course.instructor.getName());
+                System.out.println("Instructor: " + course.instructor.getName() + "\n");
             }
         }
     }   
-// 
-    // public void listEnrolledCourses() {
-// 
-    // }
-// 
+
+    public void listEnrolledCourses(Trainee person) {
+        for(Course course: person.getCourses()) {
+            System.out.println("Course Name: " + course.courseName);
+            System.out.println("Duration : " + course.duration);
+            System.out.println("Instructor: " + course.instructor.getName());
+            System.out.println("Premium: " + course.premium + "\n");
+        }
+    }
+
     public boolean logout() {
         return false;
     }
@@ -211,11 +221,11 @@ public class OnlineLearningApplication extends ErrorHandling {
                     //this.addCourse
                     break;
                 case "3":
-                    System.out.println("Logging out!!!");
+                    System.out.println("Logging out!!!\n");
                     condition = this.logout();
                     break;
                 default:
-                    System.out.println("Not a valid option");
+                    System.out.println("Not a valid option\n");
                     break;
             }
         } while (condition == true);
