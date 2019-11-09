@@ -1,7 +1,7 @@
 package app;
 
 import java.util.*;
-
+@SuppressWarnings("unchecked")
 public class MockData<T> {
     private List<T> temp;
     
