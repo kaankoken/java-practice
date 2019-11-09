@@ -54,4 +54,9 @@ public class ErrorHandling {
         for (Course c: src.getCourses())
             dest.setCourses(c);
     }
+
+    public void listInstructor(List<Instructor> instructorList) {
+        for (Instructor i: instructorList)
+            System.out.println("ID: " + i.getId() + " Instructor Name: " + i.getName());
+    }
 }
