@@ -33,6 +33,21 @@ public class OnlineLearningApplication extends ErrorHandling {
         this.instructors = mockInstructor.getData();
     }
 
+    public OnlineLearningApplication(int sizeCourse, int sizeTrainee, int sizeInstructor) {
+        super();
+        MockData<Course> mockCourse = new MockData<>();
+        mockCourse.generateMockData("Course", sizeCourse);
+        this.courses = mockCourse.getData();
+
+        MockData<Trainee> mockTrainee = new MockData<>();
+        mockTrainee.generateMockData("Trainee", sizeTrainee);
+        this.trainee = mockTrainee.getData();
+
+        MockData<Instructor> mockInstructor = new MockData<>();
+        mockInstructor.generateMockData("Instructor", sizeTrainee);
+        this.instructors = mockInstructor.getData();
+    }
+    
     public static void main(String[] args) throws Exception {
 
         OnlineLearningApplication application = new OnlineLearningApplication();
