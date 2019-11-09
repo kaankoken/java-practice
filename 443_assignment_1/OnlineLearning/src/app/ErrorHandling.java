@@ -56,6 +56,7 @@ public class ErrorHandling {
     }
 
     public void listInstructor(List<Instructor> instructorList) {
+        System.out.println("-------- List of Instructors --------");
         for (Instructor i: instructorList)
             System.out.println("ID: " + i.getId() + " Instructor Name: " + i.getName());
     }
