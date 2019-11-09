@@ -26,13 +26,20 @@ public class ErrorHandling {
         return true;
     }
 
+    public boolean isExist(String email, List<Trainee> traineeList) {
+        for(Trainee t: traineeList) {
+            if (t.getEmail().equals(email))
+                return true;
+        }
+        return false;
+    }
+
     public boolean authenticate(List<Trainee> input, String Pass, String Email) {
         for(Trainee t: input) {
             if (t.getEmail().equals(Email) && t.getPassword().equals(Pass)) {
                 return true;
             }
         }
- 
         return false;
     }
 }
