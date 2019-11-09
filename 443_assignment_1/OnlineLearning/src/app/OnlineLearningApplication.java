@@ -191,7 +191,6 @@ public class OnlineLearningApplication extends ErrorHandling {
                 person.setPremium(true);
                 System.out.println("Account has been changed to premium!!!\n");
             }
- 
         }
         else
             System.out.println("Operation is cancelled!!!\n");
@@ -217,7 +216,9 @@ public class OnlineLearningApplication extends ErrorHandling {
         }
     }
 
-    public boolean logout() {
+    public boolean logout(Trainee person, List<Trainee> traineeList) {
+        Trainee p = this.authenticate(traineeList, person.getPassword(), person.getEmail());
+        this.updateTrainee(person, p);
         return false;
     }
 
@@ -246,7 +247,7 @@ public class OnlineLearningApplication extends ErrorHandling {
                     break;
                 case "4":
                     System.out.println("Logging out!!!\n");
-                    condition = this.logout();
+                    condition = this.logout(person, this.trainee);
                     break;
                 default:
                     System.out.println("Not a valid option\n");
