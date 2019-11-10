@@ -2,12 +2,14 @@ package app;
 interface IPerformance {
     /**
      * 
+     * @param person
      * @return
      */
-    public float credit();
+    public float credit(Trainee person);
     /**
      * 
+     * @param person
      * @return
      */
-    public float monthlyFee();
+    public float monthlyFee(Trainee person);
 }

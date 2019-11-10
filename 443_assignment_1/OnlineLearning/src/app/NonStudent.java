@@ -3,7 +3,7 @@ package app;
 import java.util.*;
 import app.Trainee;
 public class NonStudent extends Trainee implements IPerformance {
-    final float creditMultiplier= (float)0.4;
+    final float CREDIT = (float)0.4;
     private String job;
     private String position;
     /** */
@@ -30,13 +30,38 @@ public class NonStudent extends Trainee implements IPerformance {
         this.job = job;
         this.position = position;
     }
-    /** */
-    public float credit() {
-        return (float)1;
+    /**
+     * 
+     * @param person
+     * @return
+     */
+    public float credit(Trainee person) {
+        int premiumCourseCount = 0;
+        for (Course c: person.getCourses()){
+            if (c.premium == true)
+                premiumCourseCount++;
+        }
+
+        premiumCourseCount *= CREDIT;
+        return (float) premiumCourseCount;
     }
-    /**  */
-    public float monthlyFee() {
-        return (float)1;
+    /**
+     * 
+     * @param person
+     * @return
+     */
+    public float monthlyFee(Trainee person) {
+        float credit = this.credit(person);
+        int premiumCourseCount = 0;
+        
+        for (Course c: person.getCourses()){
+            if (c.premium == true)
+                premiumCourseCount++;
+        }
+
+        int a = premiumCourseCount * 10;
+        float b = a - credit;
+        return (a - b) * 2;
     }
     /**
      * 
