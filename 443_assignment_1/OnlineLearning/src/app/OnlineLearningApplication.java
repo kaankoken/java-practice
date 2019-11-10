@@ -153,21 +153,24 @@ public class OnlineLearningApplication extends ErrorHandling {
         return false;
     }
 
-    // public Trainee addCourse(Trainee person) {
-        // Scanner input = new Scanner(System.in);
-// 
-        // System.out.print("Would you like to list the courses (Y/n): ");
-        // char stat = input.nextLine().charAt(0);
-// 
-        // if (stat == 'y')
-            // listAllCourses(person.getPremium());
-// 
-    // }
-// 
+    public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
+        boolean status = false;
+        for (Course c: courseList) {
+            if (c.courseName.equals(courseName)) {
+                person.setCourses(c);
+                System.out.println("Course added succesfully\n");
+                status = true;
+            }
+        }
+        if (status == false)
+            System.out.println("Course could not added\n");
+        return person;
+    }
+
     // public Trainee deleteCourse() {
 // 
     // }
-// 
+
     public void getInstructorDetails(int ID, List<Instructor> instructorList) {
         boolean status = false;
         for (Instructor i: instructorList) {
@@ -239,21 +242,28 @@ public class OnlineLearningApplication extends ErrorHandling {
         boolean condition = true;
 
         do {
-            System.out.println("(1)List All Courses\n" + "(2)Add Course\n"
-            + "(3)Get Instructor\n(4)Change Account Type\n" + "(5)Logout");
+            System.out.println("(1)List All Courses\n" + "(2)Add Course\n(3)Get Instructor"
+            + "\n(4)Change Account Type\n(5)List Enrolled Courses\n" + "(6)Logout");
             System.out.print("Your Choice: ");
             String option = input.nextLine();
 
             switch (option) {
                 case "1":
-                    this.listAllCourses(false);
+                    this.listAllCourses(person.getPremium());
                     break;
                 case "2":
-                    //this.addCourse
+                    System.out.print("Would you like to list the courses (Y/n): ");
+                    char stat = input.nextLine().charAt(0);
+                    if (stat == 'y')
+                        this.listAllCourses(person.getPremium());
+                    System.out.print("Course Name: ");
+                    String courseName = input.nextLine();
+                    
+                    person = this.addCourse(person, courses, courseName);
                     break;
                 case "3":
                     this.listInstructor(this.instructors);
-                    System.out.print("Your Choice: ");
+                    System.out.print("ID: ");
                     int id = input.nextInt();
                     this.getInstructorDetails(id, this.instructors);
                     input.nextLine();
@@ -262,6 +272,10 @@ public class OnlineLearningApplication extends ErrorHandling {
                     this.changeToPremium(person);
                     break;
                 case "5":
+                    System.out.println("------- Enrolled Courses -------");
+                    this.listEnrolledCourses(person);
+                    break;
+                case "6":
                     System.out.println("Logging out!!!\n");
                     condition = this.logout(person, this.trainee);
                     break;
