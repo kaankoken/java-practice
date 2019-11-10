@@ -16,7 +16,7 @@ public class OnlineLearningApplication extends ErrorHandling {
     public List<Instructor> instructors;
     public List<Trainee> trainee;
     public List<Course> courses;
-
+    /** */
     public OnlineLearningApplication() {
         super();
         MockData<Course> mockCourse = new MockData<>();
@@ -31,7 +31,12 @@ public class OnlineLearningApplication extends ErrorHandling {
         mockInstructor.generateMockData("Instructor", 3);
         this.instructors = mockInstructor.getData();
     }
-
+    /**
+     * 
+     * @param sizeCourse
+     * @param sizeTrainee
+     * @param sizeInstructor
+     */
     public OnlineLearningApplication(int sizeCourse, int sizeTrainee, int sizeInstructor) {
         super();
         MockData<Course> mockCourse = new MockData<>();
@@ -46,13 +51,21 @@ public class OnlineLearningApplication extends ErrorHandling {
         mockInstructor.generateMockData("Instructor", sizeTrainee);
         this.instructors = mockInstructor.getData();
     }
-
+    /**
+     * 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         OnlineLearningApplication application = new OnlineLearningApplication();
 
         application.menu(application.trainee);
     }
-
+    /**
+     * 
+     * @param traineeList
+     * 
+     */
     public void menu(List<Trainee> traineeList) {
         Scanner readInput = new Scanner(System.in);
         boolean condition = true;
@@ -95,7 +108,10 @@ public class OnlineLearningApplication extends ErrorHandling {
         } while (condition == true);
         readInput.close();
     }
-
+    /**
+     * 
+     * @return
+     */
     public Trainee signup() {
         Trainee newTrainee = new Trainee();
         Scanner input = new Scanner(System.in);
@@ -128,7 +144,12 @@ public class OnlineLearningApplication extends ErrorHandling {
         }
         return newTrainee;
     }
-
+    /**
+     * 
+     * @param traineeList
+     * @param person
+     * @return
+     */
     public boolean login(List<Trainee> traineeList, Trainee person) {
         Scanner input = new Scanner(System.in);
 
@@ -150,7 +171,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         person = null;
         return false;
     }
-
+    /**
+     * 
+     * @param person
+     * @param courseList
+     * @param courseName
+     * @return
+     */
     public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
         boolean status = false;
         for (Course c : courseList) {
@@ -164,7 +191,12 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("Course could not added\n");
         return person;
     }
-
+    /**
+     * 
+     * @param person
+     * @param courseName
+     * @return
+     */
     public Trainee deleteCourse(Trainee person, String courseName) {
         boolean status = false;
         int index = 0;
@@ -176,20 +208,16 @@ public class OnlineLearningApplication extends ErrorHandling {
                 status = true;
             }
         }
-        // for (Course c: person.getCourses()) {
-            // if (c.courseName.equals(courseName)) {
-// 
-                // person.getCourses().remove(index);
-                // System.out.println("Course has removed");
-            // }
-            // index++;
-        // }
 
         if (status == false)
             System.out.println("Course could not deleted\n");
         return person;
     }
-
+    /**
+     * 
+     * @param ID
+     * @param instructorList
+     */
     public void getInstructorDetails(int ID, List<Instructor> instructorList) {
         boolean status = false;
         for (Instructor i: instructorList) {
@@ -205,7 +233,11 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("ID of the instructor did not match please try again!!!\n");
         }
     }
-
+    /**
+     * 
+     * @param person
+     * @return
+     */
     public Trainee changeToPremium(Trainee person) {
         Scanner input = new Scanner(System.in);
 
@@ -226,7 +258,10 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("Operation is cancelled!!!\n");
         return person;
     }
-
+    /**
+     * 
+     * @param premiumStat
+     */
     public void listAllCourses(boolean premiumStat) {
         for (Course course : this.courses) {
             if (course.premium == premiumStat) {
@@ -236,7 +271,10 @@ public class OnlineLearningApplication extends ErrorHandling {
             }
         }
     }   
-
+    /**
+     * 
+     * @param person
+     */
     public void listEnrolledCourses(Trainee person) {
         for(Course course: person.getCourses()) {
             System.out.println("Course Name: " + course.courseName);
@@ -245,17 +283,28 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("Premium: " + course.premium + "\n");
         }
     }
-
+    /**
+     * 
+     * @param person
+     * @param traineeList
+     * @return
+     */
     public boolean logout(Trainee person, List<Trainee> traineeList) {
         Trainee p = this.authenticate(traineeList, person.getPassword(), person.getEmail());
         this.updateTrainee(person, p);
         return false;
     }
-
+    /**
+     * 
+     * @return
+     */
     public boolean exit() {
         return false;
     }
-
+    /**
+     * 
+     * @param person
+     */
     public void subMenu(Trainee person) {
         Scanner input = new Scanner(System.in);
         boolean condition = true;

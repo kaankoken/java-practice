@@ -4,6 +4,11 @@ import java.util.List;
 import app.Trainee;
 import app.Course;
 public class ErrorHandling {
+    /**
+     * 
+     * @param input
+     * @return
+     */
     public boolean isEmpty(Trainee input) {
         if (input.getName().length() <= 1)
             return false;
@@ -25,7 +30,12 @@ public class ErrorHandling {
         }
         return true;
     }
-
+    /**
+     * 
+     * @param email
+     * @param traineeList
+     * @return
+     */
     public boolean isExist(String email, List<Trainee> traineeList) {
         for(Trainee t: traineeList) {
             if (t.getEmail().equals(email))
@@ -33,7 +43,13 @@ public class ErrorHandling {
         }
         return false;
     }
-
+    /**
+     * 
+     * @param input
+     * @param Pass
+     * @param Email
+     * @return
+     */
     public Trainee authenticate(List<Trainee> input, String Pass, String Email) {
         for(Trainee t: input) {
             if (t.getEmail().equals(Email) && t.getPassword().equals(Pass)) {
@@ -42,7 +58,11 @@ public class ErrorHandling {
         }
         return null;
     }
-
+    /**
+     * 
+     * @param src
+     * @param dest
+     */
     public void updateTrainee(Trainee src, Trainee dest) {
         dest.setAge(src.getAge());
         dest.setEmail(src.getEmail());
@@ -54,7 +74,10 @@ public class ErrorHandling {
         for (Course c: src.getCourses())
             dest.setCourses(c);
     }
-
+    /**
+     * 
+     * @param instructorList
+     */
     public void listInstructor(List<Instructor> instructorList) {
         System.out.println("-------- List of Instructors --------");
         for (Instructor i: instructorList)

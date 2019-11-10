@@ -1,14 +1,22 @@
 package app;
 
 import java.util.*;
+/**
+ * 
+ * @param <T>
+ */
 @SuppressWarnings("unchecked")
 public class MockData<T> {
     private List<T> temp;
-    
+    /** */
     public MockData() {
         this.temp =  new ArrayList<T>();
     }
-
+    /**
+     * 
+     * @param type
+     * @param size
+     */
     public void generateMockData(String type, int size) {
         for (int i = 0; i < size; i++) {
             if (type == "Course") { 
@@ -32,7 +40,10 @@ public class MockData<T> {
             }
         }
     }
-
+    /**
+     * 
+     * @return
+     */
     public List<T> getData() {
         return temp;
     }
