@@ -12,9 +12,9 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-App<OnlineLearning>",
+            "name": "Debug (Launch)-OnlineLearningApplication<OnlineLearning>",
             "request": "launch",
-            "mainClass": "app.App",
+            "mainClass": "app.OnlineLearningApplication",
             "projectName": "OnlineLearning"
         }
     ]

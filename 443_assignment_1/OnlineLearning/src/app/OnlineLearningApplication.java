@@ -6,7 +6,8 @@ import app.Trainee;
 import app.Instructor;
 import app.ErrorHandling;
 
-/**
+/**                                                         Kaan Taha Köken 2152064
+ *                                                          CNG 443 - Assignment 1
  * @author Kaan Taha Köken
  * @see <a href=
  *      "https://github.com/kaankoken/java-practice/tree/master/443_assignment_1">Github</a>
@@ -141,10 +142,10 @@ public class OnlineLearningApplication extends ErrorHandling {
         String temp = input.nextLine();
         boolean status = this.charCheck(temp, 'f', 'm');
         
-        if (status == true)
-            newTrainee.setGender(temp.toLowerCase().charAt(0));
- 
-
+        if (status == false)
+            return null;
+        newTrainee.setGender(temp.toLowerCase().charAt(0));
+        
         System.out.print("Email: ");
         newTrainee.setEmail(input.nextLine());
 
