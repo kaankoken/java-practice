@@ -14,15 +14,15 @@ public class NonStudent extends Trainee implements IPerformance {
     }
     /**
      * It is the second constructor with full parameters
-     * @param name
-     * @param gender
-     * @param age
-     * @param email
-     * @param password
-     * @param premium
-     * @param enrolled
-     * @param job
-     * @param position
+     * @param name String
+     * @param gender Char
+     * @param age Integer
+     * @param email String
+     * @param password String
+     * @param premium Boolean 
+     * @param enrolled List<Course>
+     * @param job String
+     * @param position String
      */
     public NonStudent(String name, char gender, int age, String email, String password,
             boolean premium, List<Course> enrolled, String job, String position) {
@@ -34,7 +34,7 @@ public class NonStudent extends Trainee implements IPerformance {
      * It is implemented based on IPerformance
      * Counts # of premium courses
      * and multiplies with CREDIT constant
-     * @param person
+     * @param person Trainee
      * @return float
      */
     public float credit(Trainee person) {
@@ -51,7 +51,7 @@ public class NonStudent extends Trainee implements IPerformance {
      * According to given calculation, it counts
      * # of premium courses and multiplies with 10
      * then calls credit method for # of credits
-     * @param person
+     * @param person Trainee
      * @return float
      */
     public float monthlyFee(Trainee person) {
@@ -83,14 +83,14 @@ public class NonStudent extends Trainee implements IPerformance {
     }
     /**
      * set job variable
-     * @param job
+     * @param job String 
      */
     public void setJob(String job) {
         this.job = job;
     }
     /**
      * set position variable
-     * @param pos
+     * @param pos String
      */
     public void setPosition(String pos) {
         this.position = pos;

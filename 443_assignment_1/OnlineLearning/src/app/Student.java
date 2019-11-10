@@ -12,14 +12,14 @@ public class Student extends Trainee implements IPerformance{
     }
     /**
      * It is the second constructor with full parameters
-     * @param name
-     * @param gender
-     * @param age
-     * @param email
-     * @param password
-     * @param premium
-     * @param enrolled
-     * @param institution
+     * @param name String
+     * @param gender Char
+     * @param age Integer
+     * @param email String
+     * @param password String
+     * @param premium Boolean
+     * @param enrolled List<Course>
+     * @param institution String
      */
     public Student(String name, char gender, int age, String email, String password,
         boolean premium, List<Course> enrolled, String institution) {
@@ -30,7 +30,7 @@ public class Student extends Trainee implements IPerformance{
      * It is implemented based on IPerformance
      * Counts # of premium courses
      * and multiplies with CREDIT constant
-     * @param person
+     * @param person Trainee
      * @return float
      */
     public float credit(Trainee person) {
@@ -47,7 +47,7 @@ public class Student extends Trainee implements IPerformance{
      * According to given calculation, it counts
      * # of premium courses and multiplies with 10
      * then calls credit method for # of credits
-     * @param person
+     * @param person Trainee
      * @return float
      */
     public float monthlyFee(Trainee person) {
@@ -72,7 +72,7 @@ public class Student extends Trainee implements IPerformance{
     }
     /**
      * set institution variable
-     * @param inst
+     * @param inst String: institution
      */
     public void setInstitution(String inst) {
         this.institution = inst;

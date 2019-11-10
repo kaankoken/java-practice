@@ -14,11 +14,11 @@ public class Trainee extends Person {
     }
     /**
      * It is a constructor takes 5 parameters
-     * @param name
-     * @param gender
-     * @param age
-     * @param email
-     * @param password
+     * @param name String
+     * @param gender Char
+     * @param age Integer
+     * @param email String
+     * @param password String
      */
     public Trainee(String name, char gender, int age,
         String email, String password) {
@@ -28,13 +28,13 @@ public class Trainee extends Person {
     }
     /**
      * It is a constructor takes 7 parameters
-     * @param name
-     * @param gender
-     * @param age
-     * @param email
-     * @param password
-     * @param premium
-     * @param enrolled
+     * @param name String
+     * @param gender Char
+     * @param age Integer
+     * @param email String
+     * @param password String 
+     * @param premium Boolean
+     * @param enrolled List<Course>
      */
     public Trainee(String name, char gender, int age, String email,
         String password, boolean premium, List<Course> enrolled) {
@@ -58,14 +58,14 @@ public class Trainee extends Person {
     }
     /**
      * It sets courses to enrolled courses
-     * @param c
+     * @param c Course: course to be added to entrolled list
      */
     public void setCourses(Course c) {
         this.enrolled.add(c);
     }
     /**
      * It sets premium status
-     * @param pre
+     * @param pre Boolean: premium status
      */
     public void setPremium(boolean pre) {
         this.premium = pre;

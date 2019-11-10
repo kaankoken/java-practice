@@ -9,7 +9,7 @@ public class ErrorHandling {
     /**
      * check whether any field empty or not
      * if any filed is empty return false
-     * @param input
+     * @param input Trainee: field check object
      * @return boolean
      * 
      */
@@ -37,8 +37,8 @@ public class ErrorHandling {
     /**
      * check existance of the email in the system
      * if the email exist return true
-     * @param email
-     * @param traineeList
+     * @param email String: email for existance check
+     * @param traineeList List<Trainee>: object for existance check
      * @return boolean
      */
     public boolean isExist(String email, List<Trainee> traineeList) {
@@ -51,9 +51,9 @@ public class ErrorHandling {
     /**
      * checks whether email and password in the system
      * if in the system return trainee object
-     * @param input
-     * @param Pass
-     * @param Email
+     * @param input Trainee 
+     * @param Pass String 
+     * @param Email String
      * @return Trainee
      */
     public Trainee authenticate(List<Trainee> input, String Pass, String Email) {
@@ -66,8 +66,8 @@ public class ErrorHandling {
     }
     /**
      * it is updating given trainee object
-     * @param src
-     * @param dest
+     * @param src Trainee: source object
+     * @param dest Trainee: destination object
      */
     public void updateTrainee(Trainee src, Trainee dest) {
         dest.setAge(src.getAge());
@@ -82,7 +82,7 @@ public class ErrorHandling {
     }
     /**
      * It is helper method that lists the instructors with name and id
-     * @param instructorList
+     * @param instructorList List<Instructor>: for printing
      */
     public void listInstructor(List<Instructor> instructorList) {
         System.out.println("-------- List of Instructors --------");

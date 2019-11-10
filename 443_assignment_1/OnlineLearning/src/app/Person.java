@@ -18,9 +18,9 @@ public abstract class Person {
     /**
      * It is constructor with 3 variable
      * It sets name, gender age
-     * @param n
-     * @param g
-     * @param a
+     * @param n String: name
+     * @param g Char: gender
+     * @param a Integer: age
      */
     public Person(String n, char g, int a) {
         this.name = n;
@@ -30,11 +30,11 @@ public abstract class Person {
     /**
      * It is constructor with full parameters
      * it sets name, gender, age, email and password
-     * @param n
-     * @param g
-     * @param a
-     * @param e
-     * @param p
+     * @param n String: name
+     * @param g Char: gender
+     * @param a Integer: age
+     * @param e String: email
+     * @param p String password
      */
     public Person(String n, char g, int a, String e, String p) {
         this.name = n;
@@ -80,35 +80,35 @@ public abstract class Person {
     }
     /**
      * it sets name variable
-     * @param name
+     * @param name String
      */
     public void setName(String name) {
         this.name = name;
     }
     /**
      * it set gender variable
-     * @param gend
+     * @param gend String: gender
      */
     public void setGender(char gend) {
         this.gender = gend;
     }
     /**
      * it sets age variable
-     * @param age
+     * @param age Integer
      */
     public void setAge(int age) {
         this.age = age;
     }
     /**
      * It sets email variable
-     * @param email
+     * @param email String
      */
     public void setEmail(String email) {
         this.email = email;
     }
     /**
      * it sets password variable
-     * @param pass
+     * @param pass String: password
      */
     public void setPassword(String pass) {
         this.password = pass;

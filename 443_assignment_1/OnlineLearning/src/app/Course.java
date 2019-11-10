@@ -14,10 +14,10 @@ public class Course {
     }
     /**
      * It is constructor that takes parameters accourding to its parameters
-     * @param instructor
-     * @param courseName
-     * @param duration
-     * @param premium
+     * @param instructor Instructor: object of course
+     * @param courseName String: name of course 
+     * @param duration Float: duration of course
+     * @param premium Boolean: premium status of course
      */
     public Course (Instructor instructor, String courseName, float duration, boolean premium) {
         this.courseName = courseName;

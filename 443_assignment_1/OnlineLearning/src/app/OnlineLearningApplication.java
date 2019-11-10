@@ -33,9 +33,9 @@ public class OnlineLearningApplication extends ErrorHandling {
     }
     /**
      * 
-     * @param sizeCourse
-     * @param sizeTrainee
-     * @param sizeInstructor
+     * @param sizeCourse Integer: It accepts how many of mock data will created
+     * @param sizeTrainee Integer: It accepts how many of mock data will created
+     * @param sizeInstructor Integer: It accepts how many of mock data will created
      */
     public OnlineLearningApplication(int sizeCourse, int sizeTrainee, int sizeInstructor) {
         super();
@@ -54,7 +54,7 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * It just calls the menu methods and rest of the programs
      * starts to work.
-     * @param args
+     * @param args String
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
@@ -66,7 +66,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * This the main menu
      * Operations start from here which are signup
      * login and exist
-     * @param traineeList
+     * @param traineeList List<Trainee>: Created mock data program 
      */
     public void menu(List<Trainee> traineeList) {
         Scanner readInput = new Scanner(System.in);
@@ -156,8 +156,8 @@ public class OnlineLearningApplication extends ErrorHandling {
      * it searches inputs inside trainee list using authenticate
      * helper method. If returned object not null, it updates person object.
      * otherwise returns null;
-     * @param traineeList
-     * @param person
+     * @param traineeList List<Trainee>: Created mock data program 
+     * @param person Trainee: logged in user inside mock data
      * @return boolean
      */
     public boolean login(List<Trainee> traineeList, Trainee person) {
@@ -184,9 +184,9 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * It searchs name of the course inside courseList
      * when it finds, adds to the enrolled courses. Otherwise give error messages
-     * @param person
-     * @param courseList
-     * @param courseName
+     * @param person Trainee: logged in user inside mock data
+     * @param courseList List<Course>
+     * @param courseName String: name of the course that going to added
      * @return Trainee
      */
     public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
@@ -205,8 +205,8 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * It searchs inside enrolled courses. If it finds it,
      * deletes the course: Otherwise displays error message
-     * @param person
-     * @param courseName
+     * @param person Trainee: logged in user inside mock data
+     * @param courseName String: name of the course that going to be deleted
      * @return Trainee
      */
     public Trainee deleteCourse(Trainee person, String courseName) {
@@ -227,8 +227,8 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * checks whether Id match within the instructor list
      * if matchs, displays the instructor. otherwise displays error message
-     * @param ID
-     * @param instructorList
+     * @param ID Integer: search instructor by id
+     * @param instructorList List<Instructor> Trainee: Created mock data program 
      */
     public void getInstructorDetails(int ID, List<Instructor> instructorList) {
         boolean status = false;
@@ -249,7 +249,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * It changes the person's premium status.
      * If the person already premium or cancel the operation
      * it displays messages accordingly
-     * @param person
+     * @param person Trainee: logged in user inside mock data
      * @return Trainee
      */
     public Trainee changeToPremium(Trainee person) {
@@ -274,7 +274,7 @@ public class OnlineLearningApplication extends ErrorHandling {
     }
     /**
      * Display the courses according to person's premium status
-     * @param premiumStat
+     * @param premiumStat Boolean: premiums status of user
      */
     public void listAllCourses(boolean premiumStat) {
         for (Course course : this.courses) {
@@ -287,7 +287,7 @@ public class OnlineLearningApplication extends ErrorHandling {
     }   
     /**
      * Displays the enrolled courses by person who logged in
-     * @param person
+     * @param person Trainee: logged in user inside mock data
      */
     public void listEnrolledCourses(Trainee person) {
         for(Course course: person.getCourses()) {
@@ -300,8 +300,8 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * When user wants to logout, first finds the person in traineeList
      * then gets it, and updates it.
-     * @param person
-     * @param traineeList
+     * @param person Trainee: logged in user inside mock data
+     * @param traineeList List<Trainee>: Created mock data program 
      * @return boolean
      */
     public boolean logout(Trainee person, List<Trainee> traineeList) {
@@ -319,7 +319,7 @@ public class OnlineLearningApplication extends ErrorHandling {
     /**
      * It is a submenu.
      * Apart from login, signup and exit methods, other operations run here.
-     * @param person
+     * @param person Trainee: logged in user inside mock datax
      */
     public void subMenu(Trainee person) {
         Scanner input = new Scanner(System.in);

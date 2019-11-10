@@ -5,7 +5,7 @@ import java.util.*;
  * This is a helper class that creates mock data for the system
  * It can be generated for any type which are Course,
  * Instructor and Trainee
- * @param <T>
+ * @param <T> Generic Type: class creation
  */
 @SuppressWarnings("unchecked")
 public class MockData<T> {
@@ -17,8 +17,8 @@ public class MockData<T> {
     /**
      * It generates mock data according to its type
      * and initilialize the types with parameters
-     * @param type
-     * @param size
+     * @param type String: Type of generic object(Course, Instructor etc)
+     * @param size Integer: Mock data depends on the size
      */
     public void generateMockData(String type, int size) {
         for (int i = 0; i < size; i++) {
@@ -46,7 +46,7 @@ public class MockData<T> {
     /**
      * It returns list of generic type object that created
      * in generateMockData
-     * @return List<T>
+     * @return List<T>: T is generic type
      */
     public List<T> getData() {
         return temp;

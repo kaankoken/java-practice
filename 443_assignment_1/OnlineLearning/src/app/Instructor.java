@@ -9,10 +9,10 @@ public class Instructor extends Person {
     }
     /**
      * As a parameter it takes id, name, gender and age
-     * @param id
-     * @param n
-     * @param g
-     * @param a
+     * @param id Integer: id of instructor
+     * @param n String: name of instructor
+     * @param g Char: gender of instructor
+     * @param a Integer: age of instructor
      */
     public Instructor(int id, String n, char g, int a) {
         super(n, g, a);
@@ -27,7 +27,7 @@ public class Instructor extends Person {
     }
     /**
      * it sets id
-     * @param id
+     * @param id Integer: Id of instructor
      */
     public void setId(int id) {
         this.ID = id;
