@@ -206,9 +206,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         boolean status = false;
         for (Course c : courseList) {
             if (c.courseName.equals(courseName)) {
-                person.setCourses(c);
-                System.out.println("Course added succesfully\n");
-                status = true;
+                if (person.getCourses().contains(c))
+                    System.out.println("This course has been already added\n");
+                else {
+                    person.setCourses(c);
+                    System.out.println("Course added succesfully\n");
+                    status = true;
+                }
             }
         }
         if (status == false)
