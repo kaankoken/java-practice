@@ -139,18 +139,10 @@ public class OnlineLearningApplication extends ErrorHandling {
         System.out.print("Gender (F/M): ");
         
         String temp = input.nextLine();
-        if (temp.length() > 1) {
-            System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
-            return null;
-        }
-        else if (temp.length() == 1) {
-            char tempChar = temp.toLowerCase().charAt(0);
-            if (tempChar != 'f' && tempChar != 'm') {
-                System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
-                return null;
-            }
-            newTrainee.setGender(tempChar);
-        }
+        boolean status = this.charCheck(temp, 'f', 'm');
+        
+        if (status == true)
+            newTrainee.setGender(temp.toLowerCase().charAt(0));
  
 
         System.out.print("Email: ");
@@ -279,13 +271,17 @@ public class OnlineLearningApplication extends ErrorHandling {
      */
     public Trainee changeToPremium(Trainee person) {
         Scanner input = new Scanner(System.in);
-
+        String choice;
+        boolean status;
         System.out.println("Would you like to change your account to premium?");
-        System.out.print("Your Choice (Y/N): ");
         
-        char choice = input.nextLine().charAt(0); 
-        
-        if (choice == 'y' || choice == 'Y') {
+        do {
+            System.out.print("Your Choice (Y/N): ");
+            choice = input.nextLine();
+            status = this.charCheck(choice, 'y', 'n');
+        } while(!status);
+
+        if (choice.toLowerCase().charAt(0) == 'y') {
             if (person.getPremium() == true)
                 System.out.println("Your account has already premium!!!\n");
             else {
@@ -362,8 +358,11 @@ public class OnlineLearningApplication extends ErrorHandling {
                     break;
                 case "2":
                     System.out.print("Would you like to list the courses (Y/n): ");
-                    char stat = input.nextLine().charAt(0);
-                    if (stat == 'y')
+                    String stat = input.nextLine();
+                    boolean status = this.charCheck(stat, 'y', 'n');
+                    if (status == false)
+                        continue;
+                    if (stat.toLowerCase().charAt(0) == 'y')
                         this.listAllCourses(person.getPremium());
                     System.out.print("Course Name: ");
                     String courseName = input.nextLine();
