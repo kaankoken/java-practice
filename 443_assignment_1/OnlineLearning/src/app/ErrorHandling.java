@@ -35,6 +35,28 @@ public class ErrorHandling {
         return true;
     }
     /**
+     * This methods checks the characters in order to entered correct input or not
+     * @param value String: value thats needs to be checked
+     * @param cntrlVal1 Char: first control value
+     * @param cntrlVal2 Char: second control value
+     * @return boolean
+     */
+    public boolean charCheck(String value, char cntrlVal1, char cntrlVal2) {
+        if (value.length() > 1) {
+            System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
+            return false;
+        }
+        else if (value.length() == 1) {
+            char tempChar = value.toLowerCase().charAt(0);
+            if (tempChar != cntrlVal1 && tempChar != cntrlVal2) {
+                System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    /**
      * check existance of the email in the system
      * if the email exist return true
      * @param email String: email for existance check
