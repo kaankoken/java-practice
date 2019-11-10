@@ -6,14 +6,14 @@ import app.Person;
 public class Trainee extends Person {
     private List<Course> enrolled;
     private boolean premium;
-    /** */
+    /**It is the base constructor witout any parameters */
     public Trainee() {
         super();
         this.enrolled = new ArrayList<Course>();
         this.premium = false;
     }
     /**
-     * 
+     * It is a constructor takes 5 parameters
      * @param name
      * @param gender
      * @param age
@@ -27,7 +27,7 @@ public class Trainee extends Person {
             this.premium = false;
     }
     /**
-     * 
+     * It is a constructor takes 7 parameters
      * @param name
      * @param gender
      * @param age
@@ -43,28 +43,28 @@ public class Trainee extends Person {
             this.premium = premium;
     }
     /**
-     * 
-     * @return
+     * It gets list of enrolled courses
+     * @return List<Course>
      */
     public List<Course> getCourses() {
         return this.enrolled;
     }
     /**
-     * 
-     * @return
+     * It gets premium status
+     * @return boolean
      */
     public boolean getPremium() {
         return this.premium;
     }
     /**
-     * 
+     * It sets courses to enrolled courses
      * @param c
      */
     public void setCourses(Course c) {
         this.enrolled.add(c);
     }
     /**
-     * 
+     * It sets premium status
      * @param pre
      */
     public void setPremium(boolean pre) {

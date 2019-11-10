@@ -5,7 +5,7 @@ public class Course {
     public String courseName;
     public float duration;
     public boolean premium;
-    /** */
+    /** It is the base constructor. It does not take any value */
     public Course() {
         this.instructor =  new Instructor();
         this.courseName = "";
@@ -13,7 +13,7 @@ public class Course {
         this.premium = false;
     }
     /**
-     * 
+     * It is constructor that takes parameters accourding to its parameters
      * @param instructor
      * @param courseName
      * @param duration

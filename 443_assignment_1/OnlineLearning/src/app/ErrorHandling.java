@@ -4,10 +4,14 @@ import java.util.List;
 import app.Trainee;
 import app.Course;
 public class ErrorHandling {
+    /**This class implemented for helper methods and error checking */
+    
     /**
-     * 
+     * check whether any field empty or not
+     * if any filed is empty return false
      * @param input
-     * @return
+     * @return boolean
+     * 
      */
     public boolean isEmpty(Trainee input) {
         if (input.getName().length() <= 1)
@@ -31,10 +35,11 @@ public class ErrorHandling {
         return true;
     }
     /**
-     * 
+     * check existance of the email in the system
+     * if the email exist return true
      * @param email
      * @param traineeList
-     * @return
+     * @return boolean
      */
     public boolean isExist(String email, List<Trainee> traineeList) {
         for(Trainee t: traineeList) {
@@ -44,11 +49,12 @@ public class ErrorHandling {
         return false;
     }
     /**
-     * 
+     * checks whether email and password in the system
+     * if in the system return trainee object
      * @param input
      * @param Pass
      * @param Email
-     * @return
+     * @return Trainee
      */
     public Trainee authenticate(List<Trainee> input, String Pass, String Email) {
         for(Trainee t: input) {
@@ -59,7 +65,7 @@ public class ErrorHandling {
         return null;
     }
     /**
-     * 
+     * it is updating given trainee object
      * @param src
      * @param dest
      */
@@ -75,7 +81,7 @@ public class ErrorHandling {
             dest.setCourses(c);
     }
     /**
-     * 
+     * It is helper method that lists the instructors with name and id
      * @param instructorList
      */
     public void listInstructor(List<Instructor> instructorList) {

@@ -2,7 +2,9 @@ package app;
 
 import java.util.*;
 /**
- * 
+ * This is a helper class that creates mock data for the system
+ * It can be generated for any type which are Course,
+ * Instructor and Trainee
  * @param <T>
  */
 @SuppressWarnings("unchecked")
@@ -13,7 +15,8 @@ public class MockData<T> {
         this.temp =  new ArrayList<T>();
     }
     /**
-     * 
+     * It generates mock data according to its type
+     * and initilialize the types with parameters
      * @param type
      * @param size
      */
@@ -41,8 +44,9 @@ public class MockData<T> {
         }
     }
     /**
-     * 
-     * @return
+     * It returns list of generic type object that created
+     * in generateMockData
+     * @return List<T>
      */
     public List<T> getData() {
         return temp;

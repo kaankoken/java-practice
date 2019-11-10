@@ -52,7 +52,8 @@ public class OnlineLearningApplication extends ErrorHandling {
         this.instructors = mockInstructor.getData();
     }
     /**
-     * 
+     * It just calls the menu methods and rest of the programs
+     * starts to work.
      * @param args
      * @throws Exception
      */
@@ -62,9 +63,10 @@ public class OnlineLearningApplication extends ErrorHandling {
         application.menu(application.trainee);
     }
     /**
-     * 
+     * This the main menu
+     * Operations start from here which are signup
+     * login and exist
      * @param traineeList
-     * 
      */
     public void menu(List<Trainee> traineeList) {
         Scanner readInput = new Scanner(System.in);
@@ -109,8 +111,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         readInput.close();
     }
     /**
-     * 
-     * @return
+     * Takes all necessary parameters for signup
+     * Name, Age, Gender, Email and Password from user.
+     * First, checks whether any fields are empty then checks
+     * if anybody has the same email. If anybody has same email
+     * it does not allow to register.
+     * (I assume that cannot be the email dublicate in the system)
+     * @return Trainee
      */
     public Trainee signup() {
         Trainee newTrainee = new Trainee();
@@ -145,10 +152,13 @@ public class OnlineLearningApplication extends ErrorHandling {
         return newTrainee;
     }
     /**
-     * 
+     * Takes 2 input from user, email and password
+     * it searches inputs inside trainee list using authenticate
+     * helper method. If returned object not null, it updates person object.
+     * otherwise returns null;
      * @param traineeList
      * @param person
-     * @return
+     * @return boolean
      */
     public boolean login(List<Trainee> traineeList, Trainee person) {
         Scanner input = new Scanner(System.in);
@@ -172,11 +182,12 @@ public class OnlineLearningApplication extends ErrorHandling {
         return false;
     }
     /**
-     * 
+     * It searchs name of the course inside courseList
+     * when it finds, adds to the enrolled courses. Otherwise give error messages
      * @param person
      * @param courseList
      * @param courseName
-     * @return
+     * @return Trainee
      */
     public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
         boolean status = false;
@@ -192,20 +203,20 @@ public class OnlineLearningApplication extends ErrorHandling {
         return person;
     }
     /**
-     * 
+     * It searchs inside enrolled courses. If it finds it,
+     * deletes the course: Otherwise displays error message
      * @param person
      * @param courseName
-     * @return
+     * @return Trainee
      */
     public Trainee deleteCourse(Trainee person, String courseName) {
         boolean status = false;
-        int index = 0;
         Iterator<Course> course = person.getCourses().iterator();
-        String x = "";
         while(course.hasNext()) {
             if (course.next().courseName.equals(courseName)) {
                 course.remove();
                 status = true;
+                System.out.println("Course has been deleted succesfully\n");
             }
         }
 
@@ -214,7 +225,8 @@ public class OnlineLearningApplication extends ErrorHandling {
         return person;
     }
     /**
-     * 
+     * checks whether Id match within the instructor list
+     * if matchs, displays the instructor. otherwise displays error message
      * @param ID
      * @param instructorList
      */
@@ -234,9 +246,11 @@ public class OnlineLearningApplication extends ErrorHandling {
         }
     }
     /**
-     * 
+     * It changes the person's premium status.
+     * If the person already premium or cancel the operation
+     * it displays messages accordingly
      * @param person
-     * @return
+     * @return Trainee
      */
     public Trainee changeToPremium(Trainee person) {
         Scanner input = new Scanner(System.in);
@@ -259,7 +273,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         return person;
     }
     /**
-     * 
+     * Display the courses according to person's premium status
      * @param premiumStat
      */
     public void listAllCourses(boolean premiumStat) {
@@ -272,7 +286,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         }
     }   
     /**
-     * 
+     * Displays the enrolled courses by person who logged in
      * @param person
      */
     public void listEnrolledCourses(Trainee person) {
@@ -284,10 +298,11 @@ public class OnlineLearningApplication extends ErrorHandling {
         }
     }
     /**
-     * 
+     * When user wants to logout, first finds the person in traineeList
+     * then gets it, and updates it.
      * @param person
      * @param traineeList
-     * @return
+     * @return boolean
      */
     public boolean logout(Trainee person, List<Trainee> traineeList) {
         Trainee p = this.authenticate(traineeList, person.getPassword(), person.getEmail());
@@ -295,14 +310,15 @@ public class OnlineLearningApplication extends ErrorHandling {
         return false;
     }
     /**
-     * 
-     * @return
+     * Exit method return false when user wants to exit from the system.
+     * @return boolean
      */
     public boolean exit() {
         return false;
     }
     /**
-     * 
+     * It is a submenu.
+     * Apart from login, signup and exit methods, other operations run here.
      * @param person
      */
     public void subMenu(Trainee person) {

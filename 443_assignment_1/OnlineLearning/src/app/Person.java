@@ -6,7 +6,8 @@ public abstract class Person {
     private int age;
     private String email;
     private String password;
-    /** */
+
+    /** It is the base constructor without any parameters*/
     public Person() {
         this.name = "";
         this.gender = '0';
@@ -15,7 +16,8 @@ public abstract class Person {
         this.password = "";
     }
     /**
-     * 
+     * It is constructor with 3 variable
+     * It sets name, gender age
      * @param n
      * @param g
      * @param a
@@ -26,7 +28,8 @@ public abstract class Person {
         this.age = a;
     }
     /**
-     * 
+     * It is constructor with full parameters
+     * it sets name, gender, age, email and password
      * @param n
      * @param g
      * @param a
@@ -41,70 +44,70 @@ public abstract class Person {
         this.password = p;
     }
     /**
-     * 
-     * @return
+     * it gets name variable
+     * @return String
      */
     public String getName() {
         return this.name;
     }
     /**
-     * 
-     * @return
+     * it gets gender variable
+     * @return char
      */
     public char getGender() {
         return this.gender;
     }
     /**
-     * 
-     * @return
+     * it gets age variable
+     * @return int
      */
     public int getAge() {
         return this.age;
     }
     /**
-     * 
-     * @return
+     * It gets email variable
+     * @return String
      */
     public String getEmail() {
         return this.email;
     }
     /**
-     * 
-     * @return
+     * it gets password variable
+     * @return String
      */
     public String getPassword() {
         return this.password;
     }
     /**
-     * 
+     * it sets name variable
      * @param name
      */
     public void setName(String name) {
         this.name = name;
     }
     /**
-     * 
+     * it set gender variable
      * @param gend
      */
     public void setGender(char gend) {
         this.gender = gend;
     }
     /**
-     * 
+     * it sets age variable
      * @param age
      */
     public void setAge(int age) {
         this.age = age;
     }
     /**
-     * 
+     * It sets email variable
      * @param email
      */
     public void setEmail(String email) {
         this.email = email;
     }
     /**
-     * 
+     * it sets password variable
      * @param pass
      */
     public void setPassword(String pass) {

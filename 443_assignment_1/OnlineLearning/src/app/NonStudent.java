@@ -6,14 +6,14 @@ public class NonStudent extends Trainee implements IPerformance {
     final float CREDIT = (float)0.4;
     private String job;
     private String position;
-    /** */
+    /**It is the base constructor without any parameters */
     public NonStudent() {
         super();
         this.job = "";
         this.position = "";
     }
     /**
-     * 
+     * It is the second constructor with full parameters
      * @param name
      * @param gender
      * @param age
@@ -31,9 +31,11 @@ public class NonStudent extends Trainee implements IPerformance {
         this.position = position;
     }
     /**
-     * 
+     * It is implemented based on IPerformance
+     * Counts # of premium courses
+     * and multiplies with CREDIT constant
      * @param person
-     * @return
+     * @return float
      */
     public float credit(Trainee person) {
         int premiumCourseCount = 0;
@@ -46,9 +48,11 @@ public class NonStudent extends Trainee implements IPerformance {
         return (float) premiumCourseCount;
     }
     /**
-     * 
+     * According to given calculation, it counts
+     * # of premium courses and multiplies with 10
+     * then calls credit method for # of credits
      * @param person
-     * @return
+     * @return float
      */
     public float monthlyFee(Trainee person) {
         float credit = this.credit(person);
@@ -64,28 +68,28 @@ public class NonStudent extends Trainee implements IPerformance {
         return (a - b) * 2;
     }
     /**
-     * 
-     * @return
+     * returns job variable
+     * @return String
      */
     public String getJob() {
         return this.job;
     }
     /**
-     * 
-     * @return
+     * returns position variable
+     * @return String
      */
     public String getPosition() {
         return this.position;
     }
     /**
-     * 
+     * set job variable
      * @param job
      */
     public void setJob(String job) {
         this.job = job;
     }
     /**
-     * 
+     * set position variable
      * @param pos
      */
     public void setPosition(String pos) {
