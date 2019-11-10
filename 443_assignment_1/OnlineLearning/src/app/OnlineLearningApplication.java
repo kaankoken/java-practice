@@ -126,11 +126,32 @@ public class OnlineLearningApplication extends ErrorHandling {
         System.out.print("Name: ");
         newTrainee.setName(input.nextLine());
 
-        System.out.print("Age: ");
-        newTrainee.setAge(input.nextInt());
+        try {
+            System.out.print("Age: ");
+            newTrainee.setAge(input.nextInt());
+        } catch (InputMismatchException e) {
+            System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
+            return null;
+        }
+
         input.nextLine();
+        
         System.out.print("Gender (F/M): ");
-        newTrainee.setGender(input.nextLine().charAt(0));
+        
+        String temp = input.nextLine();
+        if (temp.length() > 1) {
+            System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
+            return null;
+        }
+        else if (temp.length() == 1) {
+            char tempChar = temp.toLowerCase().charAt(0);
+            if (tempChar != 'f' && tempChar != 'm') {
+                System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
+                return null;
+            }
+            newTrainee.setGender(tempChar);
+        }
+ 
 
         System.out.print("Email: ");
         newTrainee.setEmail(input.nextLine());
@@ -212,6 +233,10 @@ public class OnlineLearningApplication extends ErrorHandling {
     public Trainee deleteCourse(Trainee person, String courseName) {
         boolean status = false;
         Iterator<Course> course = person.getCourses().iterator();
+
+        if (person.getCourses().size() == 0)
+            System.out.println("No course found. Please add course first");
+    
         while(course.hasNext()) {
             if (course.next().courseName.equals(courseName)) {
                 course.remove();
@@ -260,7 +285,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         
         char choice = input.nextLine().charAt(0); 
         
-        if (choice == 'y') {
+        if (choice == 'y' || choice == 'Y') {
             if (person.getPremium() == true)
                 System.out.println("Your account has already premium!!!\n");
             else {
