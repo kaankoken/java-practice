@@ -1,7 +1,6 @@
 package app;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import app.Course;
 import app.Trainee;
 import app.Instructor;
@@ -54,7 +53,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         application.menu(application.trainee);
     }
 
-    public void menu(List<Trainee> traineeList) {       
+    public void menu(List<Trainee> traineeList) {
         Scanner readInput = new Scanner(System.in);
         boolean condition = true;
         System.out.println("**Welcome To Online Learning Platform**");
@@ -65,40 +64,40 @@ public class OnlineLearningApplication extends ErrorHandling {
             String option = readInput.nextLine();
 
             switch (option) {
-                case "1":
-                    Trainee isNullSignUp;
-                    
-                    do {
-                        isNullSignUp = this.signup();
-                        if (isNullSignUp != null)
-                            traineeList.add(isNullSignUp);
-                        System.out.println();
-                    } while (isNullSignUp == null);
-                    break;
-                case "2":
-                    Trainee person = new Trainee();
-                    boolean result;
-                    do {
-                        result = this.login(this.trainee, person);
-                        System.out.println();
-                    } while (result == false);
-                    
-                    this.subMenu(person);
-                    break;
-                case "3":
-                    System.out.println("Exiting from the system. Goodbye!!!");
-                    condition = this.exit();
-                    break;
-                default:
-                    System.out.println("Not a valid option");
-                    break;
+            case "1":
+                Trainee isNullSignUp;
+
+                do {
+                    isNullSignUp = this.signup();
+                    if (isNullSignUp != null)
+                        traineeList.add(isNullSignUp);
+                    System.out.println();
+                } while (isNullSignUp == null);
+                break;
+            case "2":
+                Trainee person = new Trainee();
+                boolean result;
+                do {
+                    result = this.login(this.trainee, person);
+                    System.out.println();
+                } while (result == false);
+
+                this.subMenu(person);
+                break;
+            case "3":
+                System.out.println("Exiting from the system. Goodbye!!!");
+                condition = this.exit();
+                break;
+            default:
+                System.out.println("Not a valid option");
+                break;
             }
         } while (condition == true);
         readInput.close();
     }
 
     public Trainee signup() {
-        Trainee newTrainee =  new Trainee();
+        Trainee newTrainee = new Trainee();
         Scanner input = new Scanner(System.in);
 
         System.out.print("Name: ");
@@ -115,7 +114,7 @@ public class OnlineLearningApplication extends ErrorHandling {
 
         System.out.print("Password: ");
         newTrainee.setPassword(input.nextLine());
-        
+
         boolean isEmpty = this.isEmpty(newTrainee);
         if (isEmpty == false) {
             System.out.print("Atleast one field is empty\n" + "Please re-try to Signup\n");
@@ -127,17 +126,16 @@ public class OnlineLearningApplication extends ErrorHandling {
             System.out.println("This email is already in use\n" + "Please try again with different email\n");
             return null;
         }
-        //System.out.println(newTrainee.getName());
         return newTrainee;
     }
 
     public boolean login(List<Trainee> traineeList, Trainee person) {
-        Scanner input =  new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.println("Please Enter Login Informations");
         System.out.print("Email: ");
         String email = input.nextLine();
-        
+
         System.out.print("Password: ");
         String pass = input.nextLine();
 
@@ -155,7 +153,7 @@ public class OnlineLearningApplication extends ErrorHandling {
 
     public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
         boolean status = false;
-        for (Course c: courseList) {
+        for (Course c : courseList) {
             if (c.courseName.equals(courseName)) {
                 person.setCourses(c);
                 System.out.println("Course added succesfully\n");
@@ -167,9 +165,30 @@ public class OnlineLearningApplication extends ErrorHandling {
         return person;
     }
 
-    // public Trainee deleteCourse() {
+    public Trainee deleteCourse(Trainee person, String courseName) {
+        boolean status = false;
+        int index = 0;
+        Iterator<Course> course = person.getCourses().iterator();
+        String x = "";
+        while(course.hasNext()) {
+            if (course.next().courseName.equals(courseName)) {
+                course.remove();
+                status = true;
+            }
+        }
+        // for (Course c: person.getCourses()) {
+            // if (c.courseName.equals(courseName)) {
 // 
-    // }
+                // person.getCourses().remove(index);
+                // System.out.println("Course has removed");
+            // }
+            // index++;
+        // }
+
+        if (status == false)
+            System.out.println("Course could not deleted\n");
+        return person;
+    }
 
     public void getInstructorDetails(int ID, List<Instructor> instructorList) {
         boolean status = false;
@@ -242,8 +261,8 @@ public class OnlineLearningApplication extends ErrorHandling {
         boolean condition = true;
 
         do {
-            System.out.println("(1)List All Courses\n" + "(2)Add Course\n(3)Get Instructor"
-            + "\n(4)Change Account Type\n(5)List Enrolled Courses\n" + "(6)Logout");
+            System.out.println("(1)List All Courses\n" + "(2)Add Course\n(3)Delete Course\n(4)Get Instructor"
+            + "\n(5)Change Account Type\n(6)List Enrolled Courses\n" + "(7)Logout");
             System.out.print("Your Choice: ");
             String option = input.nextLine();
 
@@ -262,20 +281,25 @@ public class OnlineLearningApplication extends ErrorHandling {
                     person = this.addCourse(person, courses, courseName);
                     break;
                 case "3":
+                    System.out.print("Which course would you like to delete: ");
+                    String course = input.nextLine();
+                    person = this.deleteCourse(person, course);
+                    break;
+                case "4":
                     this.listInstructor(this.instructors);
                     System.out.print("ID: ");
                     int id = input.nextInt();
                     this.getInstructorDetails(id, this.instructors);
                     input.nextLine();
                     break;
-                case "4":
+                case "5":
                     this.changeToPremium(person);
                     break;
-                case "5":
+                case "6":
                     System.out.println("------- Enrolled Courses -------");
                     this.listEnrolledCourses(person);
                     break;
-                case "6":
+                case "7":
                     System.out.println("Logging out!!!\n");
                     condition = this.logout(person, this.trainee);
                     break;
