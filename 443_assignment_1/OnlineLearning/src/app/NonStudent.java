@@ -20,7 +20,7 @@ public class NonStudent extends Trainee implements IPerformance {
      * @param email String
      * @param password String
      * @param premium Boolean 
-     * @param enrolled List<Course>
+     * @param enrolled List
      * @param job String
      * @param position String
      */

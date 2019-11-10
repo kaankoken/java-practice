@@ -46,7 +46,7 @@ public class MockData<T> {
     /**
      * It returns list of generic type object that created
      * in generateMockData
-     * @return List<T>: T is generic type
+     * @return List: T is generic type
      */
     public List<T> getData() {
         return temp;

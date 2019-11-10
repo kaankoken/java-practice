@@ -18,7 +18,7 @@ public class Student extends Trainee implements IPerformance{
      * @param email String
      * @param password String
      * @param premium Boolean
-     * @param enrolled List<Course>
+     * @param enrolled List
      * @param institution String
      */
     public Student(String name, char gender, int age, String email, String password,

@@ -34,7 +34,7 @@ public class Trainee extends Person {
      * @param email String
      * @param password String 
      * @param premium Boolean
-     * @param enrolled List<Course>
+     * @param enrolled List
      */
     public Trainee(String name, char gender, int age, String email,
         String password, boolean premium, List<Course> enrolled) {
@@ -44,7 +44,7 @@ public class Trainee extends Person {
     }
     /**
      * It gets list of enrolled courses
-     * @return List<Course>
+     * @return List
      */
     public List<Course> getCourses() {
         return this.enrolled;

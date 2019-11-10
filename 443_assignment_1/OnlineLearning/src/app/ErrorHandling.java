@@ -60,7 +60,7 @@ public class ErrorHandling {
      * check existance of the email in the system
      * if the email exist return true
      * @param email String: email for existance check
-     * @param traineeList List<Trainee>: object for existance check
+     * @param traineeList List: object for existance check
      * @return boolean
      */
     public boolean isExist(String email, List<Trainee> traineeList) {
@@ -104,7 +104,7 @@ public class ErrorHandling {
     }
     /**
      * It is helper method that lists the instructors with name and id
-     * @param instructorList List<Instructor>: for printing
+     * @param instructorList List: for printing
      */
     public void listInstructor(List<Instructor> instructorList) {
         System.out.println("-------- List of Instructors --------");

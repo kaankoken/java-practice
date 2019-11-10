@@ -66,7 +66,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * This the main menu
      * Operations start from here which are signup
      * login and exist
-     * @param traineeList List<Trainee>: Created mock data program 
+     * @param traineeList List: Created mock data program 
      */
     public void menu(List<Trainee> traineeList) {
         Scanner readInput = new Scanner(System.in);
@@ -169,7 +169,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * it searches inputs inside trainee list using authenticate
      * helper method. If returned object not null, it updates person object.
      * otherwise returns null;
-     * @param traineeList List<Trainee>: Created mock data program 
+     * @param traineeList List: Created mock data program 
      * @param person Trainee: logged in user inside mock data
      * @return boolean
      */
@@ -198,7 +198,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * It searchs name of the course inside courseList
      * when it finds, adds to the enrolled courses. Otherwise give error messages
      * @param person Trainee: logged in user inside mock data
-     * @param courseList List<Course>
+     * @param courseList List
      * @param courseName String: name of the course that going to added
      * @return Trainee
      */
@@ -249,7 +249,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * checks whether Id match within the instructor list
      * if matchs, displays the instructor. otherwise displays error message
      * @param ID Integer: search instructor by id
-     * @param instructorList List<Instructor> Trainee: Created mock data program 
+     * @param instructorList List: Created mock data program 
      */
     public void getInstructorDetails(int ID, List<Instructor> instructorList) {
         boolean status = false;
@@ -326,7 +326,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      * When user wants to logout, first finds the person in traineeList
      * then gets it, and updates it.
      * @param person Trainee: logged in user inside mock data
-     * @param traineeList List<Trainee>: Created mock data program 
+     * @param traineeList List: Created mock data program 
      * @return boolean
      */
     public boolean logout(Trainee person, List<Trainee> traineeList) {
