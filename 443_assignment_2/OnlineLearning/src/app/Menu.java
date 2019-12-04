@@ -1,10 +1,10 @@
 package app;
 
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.*;
 import javax.swing.*;
-import app.Login;
-import app.Signup;
+import java.util.*;
 
 public class Menu {
     private JFrame frame;
@@ -23,16 +23,15 @@ public class Menu {
         frame.setLayout(new FlowLayout());
     };
     
-    public void JMenu () {
-        btnSign.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Signup signup = new Signup(frame);
-                    signup.setVisible(true);
-                    //show message then close
-                }
-        });
-
+    public void JMenu (List<Trainee> traineeList) {
+        // btnSign.addActionListener(
+            // new ActionListener() {
+                // public void actionPerformed(ActionEvent e) {
+                    // Signup signup = new Signup(frame, traineeList);
+                    // signup.setVisible(true);
+                // }
+        // });
+// 
         btnLogin.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -41,12 +40,12 @@ public class Menu {
                 }
         });
 
-        btnExit.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-        });
+        // btnExit.addActionListener(
+            // new ActionListener() {
+                // public void actionPerformed(ActionEvent e) {
+                    // System.exit(0);
+                // }
+        // });
 
         frame.getContentPane().add(btnSign, BorderLayout.CENTER);
         frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
