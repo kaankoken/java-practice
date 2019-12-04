@@ -14,7 +14,7 @@ public class ErrorHandling {
      * 
      */
     public boolean isEmpty(Trainee input) {
-        if (input.getName().charAt(0) == ' ' && input.getName().length( ) < 1)
+        if (input.getName().length() < 1)
             return false;
         else {
             if (input.getGender() == '0')
