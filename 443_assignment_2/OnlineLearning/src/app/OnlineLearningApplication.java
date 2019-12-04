@@ -84,10 +84,9 @@ public class OnlineLearningApplication extends ErrorHandling {
         JButton btnLogin = new JButton("Login");
         JButton btnExit = new JButton("Exit");
         
-        Trainee person = new Trainee();
-        
+        //Trainee person = new Trainee();
+        signup(btnSign);
         //login(traineeList, person, btnLogin);
-        //signup();
         exit(btnExit);
         frame.getContentPane().add(btnSign, BorderLayout.CENTER);
         frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
@@ -103,50 +102,14 @@ public class OnlineLearningApplication extends ErrorHandling {
      * (I assume that cannot be the email dublicate in the system)
      * @return Trainee
      */
-    public Trainee signup() {
-        Trainee newTrainee = new Trainee();
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Name: ");
-        newTrainee.setName(input.nextLine());
-
-        try {
-            System.out.print("Age: ");
-            newTrainee.setAge(input.nextInt());
-        } catch (InputMismatchException e) {
-            System.out.println("You should have entered wrong input!!\nPlease try again!!\n");
-            return null;
-        }
-
-        input.nextLine();
-        
-        System.out.print("Gender (F/M): ");
-        
-        String temp = input.nextLine();
-        boolean status = this.charCheck(temp, 'f', 'm');
-        
-        if (status == false)
-            return null;
-        newTrainee.setGender(temp.toLowerCase().charAt(0));
-        
-        System.out.print("Email: ");
-        newTrainee.setEmail(input.nextLine());
-
-        System.out.print("Password: ");
-        newTrainee.setPassword(input.nextLine());
-
-        boolean isEmpty = this.isEmpty(newTrainee);
-        if (isEmpty == false) {
-            System.out.print("Atleast one field is empty\n" + "Please re-try to Signup\n");
-            return null;
-        }
-
-        boolean isExist = this.isExist(newTrainee.getEmail(), this.trainee);
-        if (isExist == true) {
-            System.out.println("This email is already in use\n" + "Please try again with different email\n");
-            return null;
-        }
-        return newTrainee;
+    public void signup(JButton btnSign) {
+        btnSign.addActionListener(
+            new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Signup signup = new Signup(frame, trainee);
+                    signup.setVisible(true);
+                }
+        });
     }
     /**
      * Takes 2 input from user, email and password
