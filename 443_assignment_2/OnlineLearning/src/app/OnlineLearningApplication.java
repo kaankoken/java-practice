@@ -1,12 +1,14 @@
 package app;
 
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+
 import java.util.*;
-import app.Course;
-import app.Trainee;
-import app.Instructor;
-import app.ErrorHandling;
-/**                                                         Kaan Taha Köken 2152064
- *                                                          CNG 443 - Assignment 2
+/**
+ * Kaan Taha Köken 2152064 CNG 443 - Assignment 2
+ * 
  * @author Kaan Taha Köken
  * @see <a href=
  *      "https://github.com/kaankoken/java-practice/tree/master/443_assignment_2">Github</a>
@@ -16,6 +18,8 @@ public class OnlineLearningApplication extends ErrorHandling {
     public List<Instructor> instructors;
     public List<Trainee> trainee;
     public List<Course> courses;
+    private JFrame frame;
+
     /** */
     public OnlineLearningApplication() {
         super();
@@ -30,11 +34,17 @@ public class OnlineLearningApplication extends ErrorHandling {
         MockData<Instructor> mockInstructor = new MockData<>();
         mockInstructor.generateMockData("Instructor", 3);
         this.instructors = mockInstructor.getData();
+
+        frame = new JFrame("Online Learning Platform");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new FlowLayout());
     }
+
     /**
      * 
-     * @param sizeCourse Integer: It accepts how many of mock data will created
-     * @param sizeTrainee Integer: It accepts how many of mock data will created
+     * @param sizeCourse     Integer: It accepts how many of mock data will created
+     * @param sizeTrainee    Integer: It accepts how many of mock data will created
      * @param sizeInstructor Integer: It accepts how many of mock data will created
      */
     public OnlineLearningApplication(int sizeCourse, int sizeTrainee, int sizeInstructor) {
@@ -51,64 +61,38 @@ public class OnlineLearningApplication extends ErrorHandling {
         mockInstructor.generateMockData("Instructor", sizeTrainee);
         this.instructors = mockInstructor.getData();
     }
+
     /**
-     * It just calls the menu methods and rest of the programs
-     * starts to work.
+     * It just calls the menu methods and rest of the programs starts to work.
+     * 
      * @param args String
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
         OnlineLearningApplication application = new OnlineLearningApplication();
-
         application.menu(application.trainee);
     }
+
     /**
-     * This the main menu
-     * Operations start from here which are signup
-     * login and exist
-     * @param traineeList List: Created mock data program 
+     * This the main menu Operations start from here which are signup login and
+     * exist
+     * 
+     * @param traineeList List: Created mock data program
      */
     public void menu(List<Trainee> traineeList) {
-        Scanner readInput = new Scanner(System.in);
-        boolean condition = true;
-        System.out.println("**Welcome To Online Learning Platform**");
-
-        do {
-            System.out.println("Menu\n" + "(1)Signup\n" + "(2)Login\n" + "(3)Exit");
-            System.out.print("Your Choice: ");
-            String option = readInput.nextLine();
-
-            switch (option) {
-            case "1":
-                Trainee isNullSignUp;
-
-                do {
-                    isNullSignUp = this.signup();
-                    if (isNullSignUp != null)
-                        traineeList.add(isNullSignUp);
-                    System.out.println();
-                } while (isNullSignUp == null);
-                break;
-            case "2":
-                Trainee person = new Trainee();
-                boolean result;
-                do {
-                    result = this.login(this.trainee, person);
-                    System.out.println();
-                } while (result == false);
-
-                this.subMenu(person);
-                break;
-            case "3":
-                System.out.println("Exiting from the system. Goodbye!!!");
-                condition = this.exit();
-                break;
-            default:
-                System.out.println("Not a valid option");
-                break;
-            }
-        } while (condition == true);
-        readInput.close();
+        JButton btnSign = new JButton("SignUp");
+        JButton btnLogin = new JButton("Login");
+        JButton btnExit = new JButton("Exit");
+        
+        Trainee person = new Trainee();
+        
+        //login(traineeList, person, btnLogin);
+        //signup();
+        exit(btnExit);
+        frame.getContentPane().add(btnSign, BorderLayout.CENTER);
+        frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
+        frame.getContentPane().add(btnExit, BorderLayout.CENTER);
+        frame.setVisible(true);
     }
     /**
      * Takes all necessary parameters for signup
@@ -343,8 +327,12 @@ public class OnlineLearningApplication extends ErrorHandling {
      * Exit method return false when user wants to exit from the system.
      * @return boolean
      */
-    public boolean exit() {
-        return false;
+    public void exit(JButton btnExit) {
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
     /**
      * It is a submenu.
