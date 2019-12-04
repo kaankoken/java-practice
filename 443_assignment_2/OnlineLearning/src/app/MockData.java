@@ -54,7 +54,6 @@ public class MockData<T> {
 
     private double generateRandomValue(int range) {
         double randomValue = (int) (Math.random() *((range - 0))) + 0;
-        System.out.println(randomValue);
         return randomValue;
     }
 }
