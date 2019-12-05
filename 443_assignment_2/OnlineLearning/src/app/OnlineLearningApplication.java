@@ -239,19 +239,18 @@ public class OnlineLearningApplication extends ErrorHandling {
      * Display the courses according to person's premium status
      * @param premiumStat Boolean: premiums status of user
      */
-    public void listAllCourses(boolean premiumStat) {
+    public List<Course> listAllCourses(boolean premiumStat) {
+        List<Course> temp = new ArrayList<>();
+
         for (Course course : this.courses) {
             if (course.premium == premiumStat && premiumStat == false) {
-                System.out.println("Course Name: " + course.courseName);
-                System.out.println("Duration : " + course.duration);
-                System.out.println("Instructor: " + course.instructor.getName() + "\n");
+                temp.add(course);
             }
             else if (premiumStat == true) {
-                System.out.println("Course Name: " + course.courseName);
-                System.out.println("Duration : " + course.duration);
-                System.out.println("Instructor: " + course.instructor.getName() + "\n");
+                temp.add(course);
             }
         }
+        return temp;
     }   
     /**
      * Displays the enrolled courses by person who logged in
@@ -295,6 +294,7 @@ public class OnlineLearningApplication extends ErrorHandling {
      */
     public void subMenu(Trainee person) {
         SubMenu submenu = new SubMenu(frame, person);
+        submenu.listAllCourses(frame, listAllCourses(person.getPremium()));
         submenu.setVisible(true);
         // Scanner input = new Scanner(System.in);
         // boolean condition = true;
