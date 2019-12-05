@@ -22,11 +22,13 @@ public class Login extends JDialog {
     private JButton btnCancel;
     private JPanel panel;
     private GridBagConstraints cs;
+    private Trainee person;
 
     public Login(Frame p, List<Trainee> traineeList) {
         super(p, "Login", true);
         panel = new JPanel(new GridBagLayout());
         cs = new GridBagConstraints();
+        person = null;
 
         cs.fill = GridBagConstraints.HORIZONTAL;
         
@@ -61,11 +63,14 @@ public class Login extends JDialog {
         cs.gridy = 1;
         cs.gridwidth = 2;
         panel.add(passwordField, cs);
+    }
 
+    public void login(Frame p, List<Trainee> traineeList) {
         ErrorHandling checker = new ErrorHandling();
+        
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Trainee person = checker.authenticate(traineeList, getPassword(), getEmail());
+                person = checker.authenticate(traineeList, getPassword(), getEmail());
                 if (person == null) {
                     JOptionPane.showMessageDialog(Login.this,
                     "Invalid Username or Password",
@@ -80,8 +85,6 @@ public class Login extends JDialog {
                     "Login",
                     JOptionPane.INFORMATION_MESSAGE);
                     dispose();
-                    SubMenu x = new SubMenu(p, person);
-                    x.setVisible(true);
                 }
             }
         });
@@ -91,6 +94,7 @@ public class Login extends JDialog {
                 dispose();
             }
         });
+
         JPanel bp = new JPanel();
         bp.add(btnLogin);
         bp.add(btnCancel);
@@ -100,14 +104,17 @@ public class Login extends JDialog {
         pack();
         setResizable(true);
         setLocationRelativeTo(p);
-   }
+    }
 
-   public String getEmail() {
-       return emailField.getText().trim();
-   }
+    public String getEmail() {
+        return emailField.getText().trim();
+    }
+ 
+    public String getPassword() {
+        return new String(passwordField.getPassword());
+    }
 
-   public String getPassword() {
-       System.out.println(new String(passwordField.getPassword()));
-       return new String(passwordField.getPassword());
-   }
+    public Trainee getPerson() {
+        return person;
+    }
 }
