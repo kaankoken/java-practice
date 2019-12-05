@@ -1,4 +1,5 @@
 package app;
+import app.SubMenuItem.*;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,10 +91,11 @@ public class SubMenu extends JDialog {
         setLocationRelativeTo(p);
     }
 
-    public void listAllCourses() {
+    public void listAllCourses(Frame p, List<Course> course) {
         btnListAllCourses.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                ListCourses listOfCourses = new ListCourses(p, course);
+                listOfCourses.setVisible(true);
             }
         });
     }
