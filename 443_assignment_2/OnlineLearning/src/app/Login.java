@@ -75,9 +75,13 @@ public class Login extends JDialog {
                     passwordField.setText("");
                 }
                 else {
+                    JOptionPane.showMessageDialog(Login.this,
+                    "Login is Succesful",
+                    "Login",
+                    JOptionPane.INFORMATION_MESSAGE);
                     dispose();
-                    // SubMenu x = new SubMenu(p, person);
-                    // x.setVisible(true);
+                    SubMenu x = new SubMenu(p, person);
+                    x.setVisible(true);
                 }
             }
         });
