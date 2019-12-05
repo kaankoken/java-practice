@@ -1,11 +1,15 @@
 package app;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Frame;
+import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import app.SubMenu;
+import java.util.*;
 
 public class Login extends JDialog {
 
@@ -16,52 +20,68 @@ public class Login extends JDialog {
     private JLabel passwordLabel;
     private JButton btnLogin;
     private JButton btnCancel;
+    private JPanel panel;
+    private GridBagConstraints cs;
 
-    public Login(Frame p) {
+    public Login(Frame p, List<Trainee> traineeList) {
         super(p, "Login", true);
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints cs = new GridBagConstraints();
+        panel = new JPanel(new GridBagLayout());
+        cs = new GridBagConstraints();
 
         cs.fill = GridBagConstraints.HORIZONTAL;
         
         emailLabel = new JLabel("Email: ");
+        emailField =  new JTextField(20); 
+        passwordLabel = new JLabel("Password: ");
+        passwordField = new JPasswordField(20);
+        panel.setBorder(new LineBorder(Color.GRAY));
+        btnLogin = new JButton("Login");
+        btnCancel = new JButton("Cancel");
+
+        setFields(p, traineeList);
+    }
+
+    private void setFields(Frame p, List<Trainee> traineeList) {
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
         panel.add(emailLabel, cs);
 
-        emailField =  new JTextField(20);
         cs.gridx = 1;
         cs.gridy = 0;
         cs.gridwidth = 2;
         panel.add(emailField, cs);
-        
-        passwordLabel = new JLabel("Password: ");
+
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
         panel.add(passwordLabel, cs);
 
-        passwordField = new JPasswordField(20);
         cs.gridx = 1;
         cs.gridy = 1;
         cs.gridwidth = 2;
         panel.add(passwordField, cs);
-        
-        panel.setBorder(new LineBorder(Color.GRAY));
 
-        btnLogin = new JButton("Login");
+        ErrorHandling checker = new ErrorHandling();
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // JOptionPane.showMessageDialog(Login.this,
-                // "True", "Login", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                SubMenu x = new SubMenu(p);
-                x.setVisible(true);
+                Trainee person = checker.authenticate(traineeList, getPassword(), getEmail());
+                if (person == null) {
+                    JOptionPane.showMessageDialog(Login.this,
+                    "Invalid Username or Password",
+                    "Login",
+                    JOptionPane.ERROR_MESSAGE);
+                    emailField.setText("");
+                    passwordField.setText("");
+                }
+                else {
+                    dispose();
+                    // SubMenu x = new SubMenu(p, person);
+                    // x.setVisible(true);
+                }
             }
         });
 
-        btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -76,5 +96,14 @@ public class Login extends JDialog {
         pack();
         setResizable(true);
         setLocationRelativeTo(p);
-    }
+   }
+
+   public String getEmail() {
+       return emailField.getText().trim();
+   }
+
+   public String getPassword() {
+       System.out.println(new String(passwordField.getPassword()));
+       return new String(passwordField.getPassword());
+   }
 }
