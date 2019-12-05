@@ -83,10 +83,9 @@ public class OnlineLearningApplication extends ErrorHandling {
         JButton btnSign = new JButton("SignUp");
         JButton btnLogin = new JButton("Login");
         JButton btnExit = new JButton("Exit");
-        
-        //Trainee person = new Trainee();
+
         signup(btnSign);
-        //login(traineeList, person, btnLogin);
+        login(traineeList, btnLogin);
         exit(btnExit);
         frame.getContentPane().add(btnSign, BorderLayout.CENTER);
         frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
@@ -120,26 +119,14 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param person Trainee: logged in user inside mock data
      * @return boolean
      */
-    public boolean login(List<Trainee> traineeList, Trainee person) {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Please Enter Login Informations");
-        System.out.print("Email: ");
-        String email = input.nextLine();
-
-        System.out.print("Password: ");
-        String pass = input.nextLine();
-
-        Trainee p = this.authenticate(traineeList, pass, email);
-
-        if (p != null) {
-            System.out.println("Login is succesfull\n");
-            this.updateTrainee(p, person);
-            return true;
-        }
-        System.out.println("Login is failed. Please try again\n");
-        person = null;
-        return false;
+    public void login(List<Trainee> traineeList, JButton btnLogin) {
+        btnLogin.addActionListener(
+            new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Login login = new Login(frame, traineeList);
+                    login.setVisible(true);
+                }
+        });
     }
     /**
      * It searchs name of the course inside courseList
