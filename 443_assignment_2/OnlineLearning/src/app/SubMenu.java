@@ -1,16 +1,29 @@
 package app;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Frame;
+import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.*;
 public class SubMenu extends JDialog {
     
     private static final long serialVersionUID = 7120546888194081740L;
+    private JPanel panel;
+    private GridBagConstraints cs;
+    private JButton btnListAllCourses;
+    private JButton btnAddCourse;
+    private JButton btnDeleteCourse;
+    private JButton btnGetInstructors;
+    private JButton btnChangeAccountType;
+    private JButton btnEnrolledCourses;
+    private JButton btnLogout;
 
-    public SubMenu(Frame p) {
+    public SubMenu(Frame p, Trainee person) {
         super(p, "Sub Menu", true);
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints cs = new GridBagConstraints();
+        panel = new JPanel(new GridBagLayout());
+        cs = new GridBagConstraints();
         
         cs.fill = GridBagConstraints.HORIZONTAL;
         
@@ -22,52 +35,66 @@ public class SubMenu extends JDialog {
         cs.gridy = 2;
         panel.add(new JLabel(" "), cs);
         
-        JButton r1 = new JButton("List All Courses");
+        btnListAllCourses = new JButton("List All Courses");
+        btnAddCourse = new JButton("Add Course");
+        btnDeleteCourse = new JButton("Delete Course");
+        btnGetInstructors = new JButton("Get Instructor");
+        btnChangeAccountType = new JButton("Change Account Type");
+        btnEnrolledCourses = new JButton("List Enrolled Courses");
+        btnLogout = new JButton("Logout");
+
+        setFields(p);
+    }
+
+    private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 3;
         cs.gridwidth = 2;
-        panel.add(r1, cs);
+        panel.add(btnListAllCourses, cs);
 
-        JButton r2 = new JButton("Add Course");
         cs.gridx = 0;
         cs.gridy = 4;
         cs.gridwidth = 2;
-        panel.add(r2, cs);
+        panel.add(btnAddCourse, cs);
 
-        JButton r3 = new JButton("Delete Course");
         cs.gridx = 0;
         cs.gridy = 5;
         cs.gridwidth = 2;
-        panel.add(r3, cs);
+        panel.add(btnDeleteCourse, cs);
 
-        JButton r4 = new JButton("Get Instructor");
         cs.gridx = 0;
         cs.gridy = 6;
         cs.gridwidth = 2;
-        panel.add(r4, cs);
+        panel.add(btnGetInstructors, cs);
 
-        JButton r5 = new JButton("Change Account Type");
         cs.gridx = 0;
         cs.gridy = 7;
         cs.gridwidth = 2;
-        panel.add(r5, cs);
+        panel.add(btnChangeAccountType, cs);
 
-        JButton r6 = new JButton("List Enrolled Courses");
+
         cs.gridx = 0;
         cs.gridy = 8;
         cs.gridwidth = 2;
-        panel.add(r6, cs);
-
-        JButton r7 = new JButton("Logout");
+        panel.add(btnEnrolledCourses, cs);
+       
         cs.gridx = 0;
         cs.gridy = 9;
         cs.gridwidth = 2;
-        panel.add(r7, cs);
+        panel.add(btnLogout, cs);
 
         getContentPane().add(panel);
 
         pack();
         setResizable(true);
         setLocationRelativeTo(p);
+    }
+
+    public void listAllCourses() {
+        btnListAllCourses.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }
 }
