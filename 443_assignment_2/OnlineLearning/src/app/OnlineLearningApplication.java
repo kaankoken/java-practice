@@ -120,11 +120,15 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @return boolean
      */
     public void login(List<Trainee> traineeList, JButton btnLogin) {
+        Trainee p = new Trainee();
         btnLogin.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Login login = new Login(frame, traineeList);
+                    login.login(frame, traineeList);
                     login.setVisible(true);
+                    updateTrainee(login.getPerson(), p);
+                    subMenu(p);
                 }
         });
     }
@@ -290,59 +294,61 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param person Trainee: logged in user inside mock datax
      */
     public void subMenu(Trainee person) {
-        Scanner input = new Scanner(System.in);
-        boolean condition = true;
-
-        do {
-            System.out.println("(1)List All Courses\n" + "(2)Add Course\n(3)Delete Course\n(4)Get Instructor"
-            + "\n(5)Change Account Type\n(6)List Enrolled Courses\n" + "(7)Logout");
-            System.out.print("Your Choice: ");
-            String option = input.nextLine();
-
-            switch (option) {
-                case "1":
-                    this.listAllCourses(person.getPremium());
-                    break;
-                case "2":
-                    System.out.print("Would you like to list the courses (Y/n): ");
-                    String stat = input.nextLine();
-                    boolean status = this.charCheck(stat, 'y', 'n');
-                    if (status == false)
-                        continue;
-                    if (stat.toLowerCase().charAt(0) == 'y')
-                        this.listAllCourses(person.getPremium());
-                    System.out.print("Course Name: ");
-                    String courseName = input.nextLine();
-                    
-                    person = this.addCourse(person, courses, courseName);
-                    break;
-                case "3":
-                    System.out.print("Which course would you like to delete: ");
-                    String course = input.nextLine();
-                    person = this.deleteCourse(person, course);
-                    break;
-                case "4":
-                    this.listInstructor(this.instructors);
-                    System.out.print("ID: ");
-                    int id = input.nextInt();
-                    this.getInstructorDetails(id, this.instructors);
-                    input.nextLine();
-                    break;
-                case "5":
-                    this.changeToPremium(person);
-                    break;
-                case "6":
-                    System.out.println("------- Enrolled Courses -------");
-                    this.listEnrolledCourses(person);
-                    break;
-                case "7":
-                    System.out.println("Logging out!!!\n");
-                    condition = this.logout(person, this.trainee);
-                    break;
-                default:
-                    System.out.println("Not a valid option\n");
-                    break;
-            }
-        } while (condition == true);
+        SubMenu submenu = new SubMenu(frame, person);
+        submenu.setVisible(true);
+        // Scanner input = new Scanner(System.in);
+        // boolean condition = true;
+// 
+        // do {
+            // System.out.println("(1)List All Courses\n" + "(2)Add Course\n(3)Delete Course\n(4)Get Instructor"
+            // + "\n(5)Change Account Type\n(6)List Enrolled Courses\n" + "(7)Logout");
+            // System.out.print("Your Choice: ");
+            // String option = input.nextLine();
+// 
+            // switch (option) {
+                // case "1":
+                    // this.listAllCourses(person.getPremium());
+                    // break;
+                // case "2":
+                    // System.out.print("Would you like to list the courses (Y/n): ");
+                    // String stat = input.nextLine();
+                    // boolean status = this.charCheck(stat, 'y', 'n');
+                    // if (status == false)
+                        // continue;
+                    // if (stat.toLowerCase().charAt(0) == 'y')
+                        // this.listAllCourses(person.getPremium());
+                    // System.out.print("Course Name: ");
+                    // String courseName = input.nextLine();
+                    // 
+                    // person = this.addCourse(person, courses, courseName);
+                    // break;
+                // case "3":
+                    // System.out.print("Which course would you like to delete: ");
+                    // String course = input.nextLine();
+                    // person = this.deleteCourse(person, course);
+                    // break;
+                // case "4":
+                    // this.listInstructor(this.instructors);
+                    // System.out.print("ID: ");
+                    // int id = input.nextInt();
+                    // this.getInstructorDetails(id, this.instructors);
+                    // input.nextLine();
+                    // break;
+                // case "5":
+                    // this.changeToPremium(person);
+                    // break;
+                // case "6":
+                    // System.out.println("------- Enrolled Courses -------");
+                    // this.listEnrolledCourses(person);
+                    // break;
+                // case "7":
+                    // System.out.println("Logging out!!!\n");
+                    // condition = this.logout(person, this.trainee);
+                    // break;
+                // default:
+                    // System.out.println("Not a valid option\n");
+                    // break;
+            // }
+        // } while (condition == true);
     }
 }
