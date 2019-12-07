@@ -5,7 +5,6 @@ import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -30,7 +29,7 @@ public class Signup extends JDialog {
     private JPanel panel;
     private GridBagConstraints cs;
 
-    public Signup(Frame p, List<Trainee> traineeList) {
+    public Signup(Frame p) {
         super(p, "Signup", true);
         panel = new JPanel(new GridBagLayout());
         cs = new GridBagConstraints();
@@ -48,12 +47,10 @@ public class Signup extends JDialog {
         btnSignup = new JButton("Signup");
         btnCancel = new JButton("Cancel");
         
-        setFields(p, traineeList);
+        setFields(p);
     }
 
-    private void setFields(Frame p, List<Trainee> traineeList) {
-        ErrorHandling checker = new ErrorHandling();
-
+    private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
@@ -114,48 +111,6 @@ public class Signup extends JDialog {
 
         panel.setBorder(new LineBorder(Color.GRAY));
 
-        btnSignup.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Trainee temp =  new Trainee(getName(),
-                getGender().charAt(0), Integer.parseInt(getAge()),
-                getEmail(), getPassword());
-
-                if (!checker.isEmpty(temp)) {
-                    JOptionPane.showMessageDialog(Signup.this,
-                    "At least have problem on the fields",
-                    "Sign Up",
-                    JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    if (checker.isExist(getEmail(), traineeList)) {
-                        JOptionPane.showMessageDialog(Signup.this,
-                        "E-mail exists in the system",
-                        "Sign Up",
-                        JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(Signup.this,
-                        "Account succesfully created",
-                        "Sign Up",
-                        JOptionPane.INFORMATION_MESSAGE);
-                        traineeList.add(temp);
-                        dispose();
-                    }
-                }
-                nameField.setText("");
-                emailField.setText("");
-                passwordField.setText("");
-                ageComboBox.setSelectedIndex(0);
-                genderComboBox.setSelectedIndex(0);
-            }
-        });
-
-        btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
         JPanel bp = new JPanel();
         bp.add(btnSignup);
         bp.add(btnCancel);
@@ -167,6 +122,14 @@ public class Signup extends JDialog {
         setLocationRelativeTo(p);
     }
     
+    public JButton getBtnSignup() {
+        return btnSignup;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
     public String getName() {
         return nameField.getText().trim();
     }
@@ -185,5 +148,29 @@ public class Signup extends JDialog {
 
     public String getPassword() {
         return new String(passwordField.getPassword());
+    }
+
+    public void setName() {
+        nameField.setText("");
+    }
+
+    public void setAge() {
+        ageComboBox.setSelectedIndex(0);
+    }
+
+    public void setGender() {
+        genderComboBox.setSelectedIndex(0);
+    }
+
+    public void setEmail() {
+        emailField.setText("");
+    }
+
+    public void setPassword() {
+        passwordField.setText("");
+    }
+
+    public void closePanel() {
+        dispose();
     }
 }
