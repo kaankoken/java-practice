@@ -1,8 +1,14 @@
 package app;
 
 import javax.swing.*;
+
+import app.SubMenuItem.AddCourse;
+import app.SubMenuItem.EnrolledCourse;
+import app.SubMenuItem.ListCourses;
+
 import java.awt.event.*;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.BorderLayout;
 
 import java.util.*;
@@ -87,6 +93,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         signup(btnSign);
         login(traineeList, btnLogin);
         exit(btnExit);
+
         frame.getContentPane().add(btnSign, BorderLayout.CENTER);
         frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
         frame.getContentPane().add(btnExit, BorderLayout.CENTER);
@@ -106,7 +113,50 @@ public class OnlineLearningApplication extends ErrorHandling {
         btnSign.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Signup signup = new Signup(frame, trainee);
+                    Signup signup = new Signup(frame);
+                    JButton btnSignup = signup.getBtnSignup();
+                    btnSignup.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            Trainee temp =  new Trainee(signup.getName(),
+                            signup.getGender().charAt(0), Integer.parseInt(signup.getAge()),
+                            signup.getEmail(), signup.getPassword());
+            
+                            if (!isEmpty(temp)) {
+                                JOptionPane.showMessageDialog(null,
+                                "At least have problem on the fields",
+                                "Sign Up",
+                                JOptionPane.ERROR_MESSAGE);
+                            }
+                            else {
+                                if (isExist(signup.getEmail(), trainee)) {
+                                    JOptionPane.showMessageDialog(null,
+                                    "E-mail exists in the system",
+                                    "Sign Up",
+                                    JOptionPane.ERROR_MESSAGE);
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(null,
+                                    "Account succesfully created",
+                                    "Sign Up",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                                    trainee.add(temp);
+                                    signup.closePanel();
+                                }
+                            }
+                            signup.setName();
+                            signup.setEmail();
+                            signup.setPassword();
+                            signup.setAge();
+                            signup.setGender();
+                        }
+                    });
+                    JButton btnCancel = signup.getBtnCancel();
+                    btnCancel.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            signup.closePanel();
+                        }
+                    });
+
                     signup.setVisible(true);
                 }
         });
@@ -121,17 +171,42 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @return boolean
      */
     public void login(List<Trainee> traineeList, JButton btnLogin) {
-        Trainee p = new Trainee();
         btnLogin.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Login login = new Login(frame, traineeList);
-                    login.login(frame, traineeList);
+                    Login login = new Login(frame);
+                    //login.login(frame, traineeList);
+                    JButton btnLogin = login.getBtnLogin();
+                    btnLogin.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            Trainee person = authenticate(traineeList, login.getPassword(), login.getEmail());
+                            if (person == null) {
+                                JOptionPane.showMessageDialog(null,
+                                "Invalid Username or Password",
+                                "Login",
+                                JOptionPane.ERROR_MESSAGE);
+                                login.setEmail();
+                                login.setPassword();
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null,
+                                "Login is Succesful",
+                                "Login",
+                                JOptionPane.INFORMATION_MESSAGE);
+                                login.closePanel();
+                                subMenu(person);
+                            }
+                        }
+                    });
+
+                    JButton btnCancel = login.getBtnCancel();
+                    btnCancel.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            login.closePanel();
+                        }
+                    });
+                    
                     login.setVisible(true);
-                    if (login.getPerson() != null) {
-                        updateTrainee(login.getPerson(), p);
-                        subMenu(p);
-                    }
                 }
         });
     }
@@ -141,24 +216,69 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param person Trainee: logged in user inside mock data
      * @param courseList List
      * @param courseName String: name of the course that going to added
-     * @return Trainee
+     * @return TraineebtnAddCourse
      */
-    public Trainee addCourse(Trainee person, List<Course> courseList, String courseName) {
-        boolean status = false;
-        for (Course c : courseList) {
-            if (c.courseName.equals(courseName)) {
-                if (person.getCourses().contains(c))
-                    System.out.println("This course has been already added\n");
-                else {
-                    person.setCourses(c);
-                    System.out.println("Course added succesfully\n");
-                    status = true;
+    public void addCourse(Trainee person, JButton btnAddCourse) {        
+        btnAddCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(null,
+                "Would you like to see Course list?",
+                "List All Courses",
+                JOptionPane.INFORMATION_MESSAGE);
+                
+                if (option == JOptionPane.YES_OPTION) {
+                    ListCourses listOfCourses = new ListCourses(frame, getCourses(person));
+                    listOfCourses.setVisible(true);
                 }
+                AddCourse course = new AddCourse(frame);
+                JButton btnAdd = course.getBtnAdd();
+                JButton btnCancel = course.getBtnCancel();
+
+                btnAdd.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        boolean status = true;
+                        int i = 0;
+                        for (Course c: person.getCourses()) {
+                            if (c.courseName.equals(course.getCourseField())) {
+                                JOptionPane.showMessageDialog(null,
+                                "This course has been already added",
+                                "Add Course",
+                                JOptionPane.ERROR_MESSAGE);
+                                course.setCourseField();
+                                status = false;
+                            }
+                        }
+                        if (status == true) {
+                            for (Course c: courses) {
+                                if (c.courseName.equals(course.getCourseField())){
+                                    person.setCourses(c);
+                                    JOptionPane.showMessageDialog(null,
+                                    "Course added succesfully",
+                                    "Add Course",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                                    course.closePanel();
+                                    i = 1;
+                                }
+                            }
+                        }
+                        if (status == false && i == 0) {
+                            JOptionPane.showMessageDialog(null,
+                            "Course could not added!!!",
+                            "Add Course",
+                            JOptionPane.ERROR_MESSAGE);
+                            course.setCourseField();
+                        }
+                    }
+                });
+
+                btnCancel.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        course.closePanel();
+                    }
+                });
+                course.setVisible(true);
             }
-        }
-        if (status == false)
-            System.out.println("Course could not added\n");
-        return person;
+        });
     }
     /**
      * It searchs inside enrolled courses. If it finds it,
@@ -167,20 +287,20 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param courseName String: name of the course that going to be deleted
      * @return Trainee
      */
-    public Trainee deleteCourse(Trainee person, String courseName) {
+    public Trainee deleteCourse(Trainee person, JButton btnDeleteCourse) {
         boolean status = false;
         Iterator<Course> course = person.getCourses().iterator();
 
         if (person.getCourses().size() == 0)
             System.out.println("No course found. Please add course first");
     
-        while(course.hasNext()) {
-            if (course.next().courseName.equals(courseName)) {
-                course.remove();
-                status = true;
-                System.out.println("Course has been deleted succesfully\n");
-            }
-        }
+        // while(course.hasNext()) {
+            // if (course.next().courseName.equals(courseName)) {
+                // course.remove();
+                // status = true;
+                // System.out.println("Course has been deleted succesfully\n");
+            // }
+        // }
 
         if (status == false)
             System.out.println("Course could not deleted\n");
@@ -242,28 +362,26 @@ public class OnlineLearningApplication extends ErrorHandling {
      * Display the courses according to person's premium status
      * @param premiumStat Boolean: premiums status of user
      */
-    public List<Course> listAllCourses(boolean premiumStat) {
-        List<Course> temp = new ArrayList<>();
-
-        for (Course course : this.courses) {
-            if (course.premium == premiumStat && premiumStat == false) {
-                temp.add(course);
+    public void listAllCourses(JButton btnListAllCourses, Trainee person) { 
+        List<Course> temp = getCourses(person);
+        btnListAllCourses.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ListCourses listOfCourses = new ListCourses(frame, temp);
+                listOfCourses.setVisible(true);
             }
-            else if (premiumStat == true) {
-                temp.add(course);
-            }
-        }
-        return temp;
+        });
     }   
     /**
      * Displays the enrolled courses by person who logged in
      * @param person Trainee: logged in user inside mock data
      */
-    public List<Course> listEnrolledCourses(Trainee person) {
-        List<Course> temp = new ArrayList<Course>();
-        for(Course course: person.getCourses())
-            temp.add(course);
-        return temp;
+    public void listEnrolledCourses(Trainee person, JButton btnEnrolledCourses) {
+        btnEnrolledCourses.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EnrolledCourse enrolled = new EnrolledCourse(frame, person.getCourses());
+                enrolled.setVisible(true);
+            }
+        });
     }
     /**
      * When user wants to logout, first finds the person in traineeList
@@ -272,8 +390,19 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param traineeList List: Created mock data program 
      * @return boolean
      */
-    public boolean logout() {
-        return true;
+    public void logout(JButton btnLogout, Trainee person) {
+        btnLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,
+                "Logout!!!",
+                "Logout",
+                JOptionPane.INFORMATION_MESSAGE);
+               
+                JComponent comp = (JComponent) e.getSource();
+                Window win = SwingUtilities.getWindowAncestor(comp);
+                win.dispose();
+            }
+        });
     }
     /**
      * Exit method return false when user wants to exit from the sstem.
@@ -293,25 +422,13 @@ public class OnlineLearningApplication extends ErrorHandling {
      */
     public void subMenu(Trainee person) {
         SubMenu submenu = new SubMenu(frame, person);
-        submenu.listAllCourses(frame, listAllCourses(person.getPremium()));
-        submenu.addCourse(frame, courses);
-        submenu.enrolledCourses(frame, listEnrolledCourses(person));
-        submenu.Logout(logout());
+        listAllCourses(submenu.listAllCourses(), person);
+        addCourse(person, submenu.addCourse());
+        deleteCourse(person, submenu.deleteCourse());
+        listEnrolledCourses(person, submenu.enrolledCourses());
+        logout(submenu.logout(), person);
         submenu.setVisible(true);
         
-                // case "2":
-                    // System.out.print("Would you like to list the courses (Y/n): ");
-                    // String stat = input.nextLine();
-                    // boolean status = this.charCheck(stat, 'y', 'n');
-                    // if (status == false)
-                        // continue;
-                    // if (stat.toLowerCase().charAt(0) == 'y')
-                        // this.listAllCourses(person.getPremium());
-                    // System.out.print("Course Name: ");
-                    // String courseName = input.nextLine();
-                    // 
-                    // person = this.addCourse(person, courses, courseName);
-                    // break;
                 // case "3":
                     // System.out.print("Which course would you like to delete: ");
                     // String course = input.nextLine();
@@ -327,5 +444,19 @@ public class OnlineLearningApplication extends ErrorHandling {
                 // case "5":
                     // this.changeToPremium(person);
                     // break;
+    }
+
+    private List<Course> getCourses(Trainee person) {
+        List<Course> temp = new ArrayList<>();
+
+        for (Course course : this.courses) {
+            if (course.premium == person.getPremium() && person.getPremium() == false) {
+                temp.add(course);
+            }
+            else if (person.getPremium() == true) {
+                temp.add(course);
+            }
+        }
+        return temp;
     }
 }
