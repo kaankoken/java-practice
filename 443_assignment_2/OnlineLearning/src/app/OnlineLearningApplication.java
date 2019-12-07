@@ -3,6 +3,7 @@ package app;
 import javax.swing.*;
 
 import app.SubMenuItem.AddCourse;
+import app.SubMenuItem.DeleteCourse;
 import app.SubMenuItem.EnrolledCourse;
 import app.SubMenuItem.ListCourses;
 
@@ -287,24 +288,53 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param courseName String: name of the course that going to be deleted
      * @return Trainee
      */
-    public Trainee deleteCourse(Trainee person, JButton btnDeleteCourse) {
-        boolean status = false;
-        Iterator<Course> course = person.getCourses().iterator();
+    public void deleteCourse(Trainee person, JButton btnDeleteCourse) {
+        btnDeleteCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DeleteCourse delete = new DeleteCourse(frame);
+                JButton btnDelete = delete.getBtnDelete();
+                btnDelete.addActionListener(new ActionListener() {
+                    Iterator<Course> course = person.getCourses().iterator();
+                    boolean status = true;
+                    int i = 0;
+                    public void actionPerformed(ActionEvent e) {
+                        if (person.getCourses().size() == 0) {
+                            JOptionPane.showMessageDialog(null,
+                            "No course found. Please add course first",
+                            "Delete Course",
+                            JOptionPane.ERROR_MESSAGE);
+                            status = false;
+                        }
+                        if (status == true) {
+                            while(course.hasNext()) {
+                                if (course.next().courseName.equals(delete.getCourseField())) {
+                                    course.remove();
+                                    status = true;
+                                    JOptionPane.showMessageDialog(null,
+                                    "Course has been deleted succesfully",
+                                    "Delete Course",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                                    delete.closePanel();
+                                }
+                            }
+                        }
+                        if (status == false && i == 0)
+                            JOptionPane.showMessageDialog(null,
+                            "Course could not deleted",
+                            "Delete Course",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                });
 
-        if (person.getCourses().size() == 0)
-            System.out.println("No course found. Please add course first");
-    
-        // while(course.hasNext()) {
-            // if (course.next().courseName.equals(courseName)) {
-                // course.remove();
-                // status = true;
-                // System.out.println("Course has been deleted succesfully\n");
-            // }
-        // }
-
-        if (status == false)
-            System.out.println("Course could not deleted\n");
-        return person;
+                JButton btnCancel = delete.getBtnCancel();
+                btnCancel.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        delete.dispose();
+                    }
+                });
+                delete.setVisible(true); 
+            }
+        });
     }
     /**
      * checks whether Id match within the instructor list
