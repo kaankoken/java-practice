@@ -16,10 +16,10 @@ public class ListCourses extends JDialog {
     public ListCourses(Frame p, List<Course> course) {
         super(p, "List All Courses", true);
         panel = new JPanel(new GridBagLayout());
-        test(p, course);
+        displayData(p, course);
     }
 
-    private void test(Frame p, List<Course> course) {
+    private void displayData(Frame p, List<Course> course) {
         String[] columns = {"Course Name", "Duration", "Instructor"};
         Object[][] data = new Object[course.size()][3];
         
