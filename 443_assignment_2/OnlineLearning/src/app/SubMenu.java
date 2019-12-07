@@ -126,4 +126,16 @@ public class SubMenu extends JDialog {
             }
         });
     }
+
+    public void Logout(boolean status) {
+        btnLogout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(SubMenu.this,
+                "Logout!!!",
+                "Logout",
+                JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
+        });
+    }
 }
