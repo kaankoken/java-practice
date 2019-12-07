@@ -99,4 +99,31 @@ public class SubMenu extends JDialog {
             }
         });
     }
+
+    public void addCourse(Frame p, List<Course> course) {
+        btnAddCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int option =JOptionPane.showConfirmDialog(null,
+                "Would you like to see Course list?",
+                "List All Courses",
+                JOptionPane.INFORMATION_MESSAGE);
+                if (option == JOptionPane.YES_OPTION) {
+                    ListCourses listOfCourses = new ListCourses(p, course);
+                    listOfCourses.setVisible(true);
+                }
+                AddCourse course = new AddCourse(p);
+                course.addC();
+                course.setVisible(true);
+            }
+        });
+    }
+
+    public void enrolledCourses(Frame p, List<Course> course) {
+        btnEnrolledCourses.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EnrolledCourse enrolled = new EnrolledCourse(p, course);
+                enrolled.setVisible(true);
+            }
+        });
+    }
 }
