@@ -40,10 +40,10 @@ public class Login extends JDialog {
         btnLogin = new JButton("Login");
         btnCancel = new JButton("Cancel");
 
-        setFields(p, traineeList);
+        setFields(p);
     }
 
-    private void setFields(Frame p, List<Trainee> traineeList) {
+    private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
@@ -63,6 +63,16 @@ public class Login extends JDialog {
         cs.gridy = 1;
         cs.gridwidth = 2;
         panel.add(passwordField, cs);
+
+        JPanel bp = new JPanel();
+        bp.add(btnLogin);
+        bp.add(btnCancel);
+        getContentPane().add(panel, BorderLayout.CENTER);
+        getContentPane().add(bp, BorderLayout.PAGE_END);
+
+        pack();
+        setResizable(true);
+        setLocationRelativeTo(p);
     }
 
     public void login(Frame p, List<Trainee> traineeList) {
@@ -94,16 +104,6 @@ public class Login extends JDialog {
                 dispose();
             }
         });
-
-        JPanel bp = new JPanel();
-        bp.add(btnLogin);
-        bp.add(btnCancel);
-        getContentPane().add(panel, BorderLayout.CENTER);
-        getContentPane().add(bp, BorderLayout.PAGE_END);
-
-        pack();
-        setResizable(true);
-        setLocationRelativeTo(p);
     }
 
     public String getEmail() {
