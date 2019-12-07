@@ -5,12 +5,9 @@ import java.awt.GridBagLayout;
 import java.awt.Frame;
 import java.awt.Color;
 import java.awt.BorderLayout;
-import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
-
-import java.util.*;
-
 public class Login extends JDialog {
 
     private static final long serialVersionUID = -6340242614877648589L;
@@ -22,13 +19,11 @@ public class Login extends JDialog {
     private JButton btnCancel;
     private JPanel panel;
     private GridBagConstraints cs;
-    private Trainee person;
 
-    public Login(Frame p, List<Trainee> traineeList) {
+    public Login(Frame p) {
         super(p, "Login", true);
         panel = new JPanel(new GridBagLayout());
         cs = new GridBagConstraints();
-        person = null;
 
         cs.fill = GridBagConstraints.HORIZONTAL;
         
@@ -75,37 +70,6 @@ public class Login extends JDialog {
         setLocationRelativeTo(p);
     }
 
-    public void login(Frame p, List<Trainee> traineeList) {
-        ErrorHandling checker = new ErrorHandling();
-        
-        btnLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                person = checker.authenticate(traineeList, getPassword(), getEmail());
-                if (person == null) {
-                    JOptionPane.showMessageDialog(Login.this,
-                    "Invalid Username or Password",
-                    "Login",
-                    JOptionPane.ERROR_MESSAGE);
-                    emailField.setText("");
-                    passwordField.setText("");
-                }
-                else {
-                    JOptionPane.showMessageDialog(Login.this,
-                    "Login is Succesful",
-                    "Login",
-                    JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
-                }
-            }
-        });
-
-        btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-    }
-
     public String getEmail() {
         return emailField.getText().trim();
     }
@@ -114,7 +78,23 @@ public class Login extends JDialog {
         return new String(passwordField.getPassword());
     }
 
-    public Trainee getPerson() {
-        return person;
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void closePanel() {
+        dispose();
+    }
+
+    public void setEmail() {
+        emailField.setText("");
+    }
+
+    public void setPassword() {
+        passwordField.setText("");
     }
 }
