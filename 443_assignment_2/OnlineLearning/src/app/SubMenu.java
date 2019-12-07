@@ -91,51 +91,35 @@ public class SubMenu extends JDialog {
         setLocationRelativeTo(p);
     }
 
-    public void listAllCourses(Frame p, List<Course> course) {
-        btnListAllCourses.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ListCourses listOfCourses = new ListCourses(p, course);
-                listOfCourses.setVisible(true);
-            }
-        });
+    public JButton listAllCourses() {
+        return btnListAllCourses;
     }
 
-    public void addCourse(Frame p, List<Course> course) {
-        btnAddCourse.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int option =JOptionPane.showConfirmDialog(null,
-                "Would you like to see Course list?",
-                "List All Courses",
-                JOptionPane.INFORMATION_MESSAGE);
-                if (option == JOptionPane.YES_OPTION) {
-                    ListCourses listOfCourses = new ListCourses(p, course);
-                    listOfCourses.setVisible(true);
-                }
-                AddCourse course = new AddCourse(p);
-                course.addC();
-                course.setVisible(true);
-            }
-        });
+    public JButton addCourse() {
+        return btnAddCourse;
     }
 
-    public void enrolledCourses(Frame p, List<Course> course) {
-        btnEnrolledCourses.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                EnrolledCourse enrolled = new EnrolledCourse(p, course);
-                enrolled.setVisible(true);
-            }
-        });
+    public JButton deleteCourse() {
+        return btnDeleteCourse;
     }
 
-    public void Logout(boolean status) {
-        btnLogout.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(SubMenu.this,
-                "Logout!!!",
-                "Logout",
-                JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            }
-        });
+    public JButton listInstructors() {
+        return btnGetInstructors;
+    }
+
+    public JButton changePremiumStatus() {
+        return btnChangeAccountType;
+    }
+
+    public JButton enrolledCourses() {
+       return btnEnrolledCourses;
+    }
+
+    public JButton logout() {
+        return btnLogout;
+    }
+
+    public void closePanel() {
+        dispose();
     }
 }
