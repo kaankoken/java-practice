@@ -90,6 +90,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         frame.getContentPane().add(btnSign, BorderLayout.CENTER);
         frame.getContentPane().add(btnLogin, BorderLayout.CENTER);
         frame.getContentPane().add(btnExit, BorderLayout.CENTER);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     /**
@@ -127,8 +128,10 @@ public class OnlineLearningApplication extends ErrorHandling {
                     Login login = new Login(frame, traineeList);
                     login.login(frame, traineeList);
                     login.setVisible(true);
-                    updateTrainee(login.getPerson(), p);
-                    subMenu(p);
+                    if (login.getPerson() != null) {
+                        updateTrainee(login.getPerson(), p);
+                        subMenu(p);
+                    }
                 }
         });
     }
@@ -256,13 +259,11 @@ public class OnlineLearningApplication extends ErrorHandling {
      * Displays the enrolled courses by person who logged in
      * @param person Trainee: logged in user inside mock data
      */
-    public void listEnrolledCourses(Trainee person) {
-        for(Course course: person.getCourses()) {
-            System.out.println("Course Name: " + course.courseName);
-            System.out.println("Duration : " + course.duration);
-            System.out.println("Instructor: " + course.instructor.getName());
-            System.out.println("Premium: " + course.premium + "\n");
-        }
+    public List<Course> listEnrolledCourses(Trainee person) {
+        List<Course> temp = new ArrayList<Course>();
+        for(Course course: person.getCourses())
+            temp.add(course);
+        return temp;
     }
     /**
      * When user wants to logout, first finds the person in traineeList
@@ -277,7 +278,7 @@ public class OnlineLearningApplication extends ErrorHandling {
         return false;
     }
     /**
-     * Exit method return false when user wants to exit from the system.
+     * Exit method return false when user wants to exit from the sstem.
      * @return boolean
      */
     public void exit(JButton btnExit) {
@@ -295,6 +296,8 @@ public class OnlineLearningApplication extends ErrorHandling {
     public void subMenu(Trainee person) {
         SubMenu submenu = new SubMenu(frame, person);
         submenu.listAllCourses(frame, listAllCourses(person.getPremium()));
+        submenu.addCourse(frame, courses);
+        submenu.enrolledCourses(frame, listEnrolledCourses(person));
         submenu.setVisible(true);
         // Scanner input = new Scanner(System.in);
         // boolean condition = true;
