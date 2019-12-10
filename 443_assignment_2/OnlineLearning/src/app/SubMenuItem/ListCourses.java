@@ -12,7 +12,7 @@ public class ListCourses extends JDialog {
     private JPanel panel;
     private JTable table;
     private JScrollPane scrollPane;
-    
+
     public ListCourses(Frame p, List<Course> course) {
         super(p, "List All Courses", true);
         panel = new JPanel(new GridBagLayout());
