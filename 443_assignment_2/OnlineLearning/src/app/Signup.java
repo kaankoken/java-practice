@@ -16,11 +16,13 @@ public class Signup extends JDialog {
     private JTextField nameField;
     private JComboBox ageComboBox;
     private JComboBox genderComboBox;
+    private JComboBox typeComboBox;
     private JTextField emailField;
     private JPasswordField passwordField;
     private JLabel nameLabel;
     private JLabel ageLabel;
     private JLabel genderLabel;
+    private JLabel typeLabel;
     private JLabel emailLabel;
     private JLabel passwordLabel;
     private JButton btnSignup;
@@ -46,6 +48,7 @@ public class Signup extends JDialog {
         passwordField = new JPasswordField(20);
         btnSignup = new JButton("Signup");
         btnCancel = new JButton("Cancel");
+        typeLabel = new JLabel("Account Type: ");
         
         setFields(p);
     }
@@ -92,20 +95,32 @@ public class Signup extends JDialog {
         cs.gridx = 0;
         cs.gridy = 3;
         cs.gridwidth = 1;
+        panel.add(typeLabel, cs);
+
+        String[] accountType = {"Student", "Non-Student"};
+        typeComboBox = new JComboBox<>(accountType);
+        cs.gridx = 1;
+        cs.gridy = 3;
+        cs.gridwidth = 1;
+        panel.add(typeComboBox, cs);
+
+        cs.gridx = 0;
+        cs.gridy = 5;
+        cs.gridwidth = 1;
         panel.add(emailLabel, cs);
 
         cs.gridx = 1;
-        cs.gridy = 3;
+        cs.gridy = 5;
         cs.gridwidth = 2;
         panel.add(emailField, cs);
 
         cs.gridx = 0;
-        cs.gridy = 4;
+        cs.gridy = 6;
         cs.gridwidth = 1;
         panel.add(passwordLabel, cs);
         
         cs.gridx = 1;
-        cs.gridy = 4;
+        cs.gridy = 6;
         cs.gridwidth = 1;
         panel.add(passwordField, cs);
 
@@ -142,6 +157,10 @@ public class Signup extends JDialog {
         return genderComboBox.getSelectedItem().toString();
     }
 
+    public String getAccountType() {
+        return typeComboBox.getSelectedItem().toString();
+    }
+
     public String getEmail() {
         return emailField.getText().trim();
     }
@@ -160,6 +179,10 @@ public class Signup extends JDialog {
 
     public void setGender() {
         genderComboBox.setSelectedIndex(0);
+    }
+
+    public void setAccountType() {
+        typeComboBox.setSelectedIndex(0);
     }
 
     public void setEmail() {
