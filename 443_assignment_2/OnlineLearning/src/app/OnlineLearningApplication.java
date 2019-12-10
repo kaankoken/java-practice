@@ -250,9 +250,12 @@ public class OnlineLearningApplication extends ErrorHandling {
                         boolean status = true;
                         int i = 0;
                         for (Course c: courses) {
-                            if (!c.courseName.equals(course.getCourseField())) {
-                                status = false;
+                            if (c.courseName.equals(course.getCourseField())) {
+                                status = true;
+                                break;
                             }
+                            else
+                                status = false;
                         }
                         if (status == false)
                             JOptionPane.showMessageDialog(null,
@@ -363,7 +366,6 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param instructorList List: Created mock data program 
      */
     public void getInstructorDetails(JButton btnGetInstructors) {
-        boolean status = false;
         btnGetInstructors.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ListInstructors listInst = new ListInstructors(frame, instructors);
