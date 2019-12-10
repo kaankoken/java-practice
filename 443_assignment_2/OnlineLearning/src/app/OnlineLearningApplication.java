@@ -3,9 +3,12 @@ package app;
 import javax.swing.*;
 
 import app.SubMenuItem.AddCourse;
+import app.SubMenuItem.ChangePremium;
 import app.SubMenuItem.DeleteCourse;
 import app.SubMenuItem.EnrolledCourse;
 import app.SubMenuItem.ListCourses;
+import app.SubMenuItem.ListInstDetails;
+import app.SubMenuItem.ListInstructors;
 
 import java.awt.event.*;
 import java.awt.FlowLayout;
@@ -121,7 +124,7 @@ public class OnlineLearningApplication extends ErrorHandling {
                             Trainee temp =  new Trainee(signup.getName(),
                             signup.getGender().charAt(0), Integer.parseInt(signup.getAge()),
                             signup.getEmail(), signup.getPassword());
-            
+                            
                             if (!isEmpty(temp)) {
                                 JOptionPane.showMessageDialog(null,
                                 "At least have problem on the fields",
@@ -136,6 +139,12 @@ public class OnlineLearningApplication extends ErrorHandling {
                                     JOptionPane.ERROR_MESSAGE);
                                 }
                                 else {
+                                    if (signup.getAccountType().equals("Student")) {
+
+                                    }
+                                    else {
+                                        
+                                    }
                                     JOptionPane.showMessageDialog(null,
                                     "Account succesfully created",
                                     "Sign Up",
@@ -149,6 +158,7 @@ public class OnlineLearningApplication extends ErrorHandling {
                             signup.setPassword();
                             signup.setAge();
                             signup.setGender();
+                            signup.setAccountType();
                         }
                     });
                     JButton btnCancel = signup.getBtnCancel();
@@ -239,6 +249,16 @@ public class OnlineLearningApplication extends ErrorHandling {
                     public void actionPerformed(ActionEvent e) {
                         boolean status = true;
                         int i = 0;
+                        for (Course c: courses) {
+                            if (!c.courseName.equals(course.getCourseField())) {
+                                status = false;
+                            }
+                        }
+                        if (status == false)
+                            JOptionPane.showMessageDialog(null,
+                            "Entered wrong course name",
+                            "Add Course",
+                            JOptionPane.ERROR_MESSAGE);
                         for (Course c: person.getCourses()) {
                             if (c.courseName.equals(course.getCourseField())) {
                                 JOptionPane.showMessageDialog(null,
@@ -342,20 +362,43 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param ID Integer: search instructor by id
      * @param instructorList List: Created mock data program 
      */
-    public void getInstructorDetails(int ID, List<Instructor> instructorList) {
+    public void getInstructorDetails(JButton btnGetInstructors) {
         boolean status = false;
-        for (Instructor i: instructorList) {
-            if (i.getId() == ID) {
-                System.out.println("Instructor Name: " + i.getName());
-                System.out.println("Age : " + i.getAge());
-                System.out.println("Gender: " + i.getGender() +"\n");
-                status = true;
-            }
-        }
+        btnGetInstructors.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ListInstructors listInst = new ListInstructors(frame, instructors);
+                listInst.setVisible(true);
 
-        if (status == false) {
-            System.out.println("ID of the instructor did not match please try again!!!\n");
-        }
+                ListInstDetails details = new ListInstDetails(frame);
+                JButton btnInstructor = details.getInstButton();
+                btnInstructor.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        boolean status = false;
+                        for (Instructor i: instructors) {
+                            if (i.getId() == details.getInstructorID()) {
+                                details.setVisibility();
+                                details.displayData(frame, i);
+                                status = true;
+                            }
+                        }
+                        if (status == false) {
+                            JOptionPane.showMessageDialog(null,
+                            "ID of the instructor did not match please try again!!!",
+                            "Details of Instructors",
+                            JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
+                
+                JButton btnCancel = details.getCancelButton();
+                btnCancel.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        details.closePanel();
+                    }
+                });
+                details.setVisible(true);
+            }
+        });
     }
     /**
      * It changes the person's premium status.
@@ -364,39 +407,53 @@ public class OnlineLearningApplication extends ErrorHandling {
      * @param person Trainee: logged in user inside mock data
      * @return Trainee
      */
-    public Trainee changeToPremium(Trainee person) {
-        Scanner input = new Scanner(System.in);
-        String choice;
-        boolean status;
-        System.out.println("Would you like to change your account to premium?");
-        
-        do {
-            System.out.print("Your Choice (Y/N): ");
-            choice = input.nextLine();
-            status = this.charCheck(choice, 'y', 'n');
-        } while(!status);
-
-        if (choice.toLowerCase().charAt(0) == 'y') {
-            if (person.getPremium() == true)
-                System.out.println("Your account has already premium!!!\n");
-            else {
-                person.setPremium(true);
-                System.out.println("Account has been changed to premium!!!\n");
+    public void changeToPremium(Trainee person, JButton btnChangeAccountType) {
+        btnChangeAccountType.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (person.getPremium() == true) {
+                    JOptionPane.showMessageDialog(null,
+                    "Your account has already premium!!!",
+                    "Premium Status",
+                    JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    ChangePremium pre = new ChangePremium(frame);
+                    
+                    JButton btnYes = pre.getBtnYes();
+                    btnYes.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            person.setPremium(true);
+                            JOptionPane.showMessageDialog(null,
+                            "Account has been changed to premium!!!",
+                            "Premium Status",
+                            JOptionPane.INFORMATION_MESSAGE);
+                            pre.closePanel();
+                        }
+                    });
+                    
+                    JButton btnNo = pre.getBtnNo();
+                    btnNo.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            JOptionPane.showMessageDialog(null,
+                            "Operation is cancelled",
+                            "Premium Status",
+                            JOptionPane.ERROR_MESSAGE);
+                            pre.closePanel();
+                        }
+                    });
+                    pre.setVisible(true);
+                }
             }
-        }
-        else
-            System.out.println("Operation is cancelled!!!\n");
-        return person;
+        });
     }
     /**
      * Display the courses according to person's premium status
      * @param premiumStat Boolean: premiums status of user
      */
     public void listAllCourses(JButton btnListAllCourses, Trainee person) { 
-        List<Course> temp = getCourses(person);
         btnListAllCourses.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ListCourses listOfCourses = new ListCourses(frame, temp);
+                ListCourses listOfCourses = new ListCourses(frame, getCourses(person));
                 listOfCourses.setVisible(true);
             }
         });
@@ -456,21 +513,11 @@ public class OnlineLearningApplication extends ErrorHandling {
         addCourse(person, submenu.addCourse());
         deleteCourse(person, submenu.deleteCourse());
         listEnrolledCourses(person, submenu.enrolledCourses());
+        getInstructorDetails(submenu.listInstructors());
+        changeToPremium(person, submenu.changePremiumStatus());
         logout(submenu.logout(), person);
         submenu.setVisible(true);
         
-                // case "3":
-                    // System.out.print("Which course would you like to delete: ");
-                    // String course = input.nextLine();
-                    // person = this.deleteCourse(person, course);
-                    // break;
-                // case "4":
-                    // this.listInstructor(this.instructors);
-                    // System.out.print("ID: ");
-                    // int id = input.nextInt();
-                    // this.getInstructorDetails(id, this.instructors);
-                    // input.nextLine();
-                    // break;
                 // case "5":
                     // this.changeToPremium(person);
                     // break;
