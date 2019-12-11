@@ -19,7 +19,10 @@ public class Login extends JDialog {
     private JButton btnCancel;
     private JPanel panel;
     private GridBagConstraints cs;
-
+    /**
+     * Constructor, accepts Frame objecs as parameter
+     * @param p
+     */
     public Login(Frame p) {
         super(p, "Login", true);
         panel = new JPanel(new GridBagLayout());
@@ -37,7 +40,12 @@ public class Login extends JDialog {
 
         setFields(p);
     }
-
+    /**
+     * Accepts Frame Object as a parameter, and 
+     * sets the location of buttons and labels, 
+     * adds to the panels. Lastly, adds to the main frame
+     * @param p
+     */
     private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
@@ -69,31 +77,51 @@ public class Login extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Gets the value of written text into email field
+     * @return String
+     */
     public String getEmail() {
         return emailField.getText().trim();
     }
- 
+    /**
+     * Gets the value of written text into password field
+     * @return String
+     */
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
-
+    /**
+     * Returns the login button
+     * @return JButton
+     */
     public JButton getBtnLogin() {
         return btnLogin;
     }
-
+    /**
+     * Returns the cancel button
+     * @return JButton
+     */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+    /**
+     * close the panel
+     */
     public void closePanel() {
         dispose();
     }
-
+    /**
+     * Set the email field with empty string
+     * @return void
+     */
     public void setEmail() {
         emailField.setText("");
     }
-
+    /**
+     * Set the password field with empty string
+     * @return void
+     */
     public void setPassword() {
         passwordField.setText("");
     }

@@ -17,7 +17,12 @@ public class ListInstructors extends JDialog {
         panel = new JPanel(new GridBagLayout());
         displayData(p, instructors);
     }
-
+    /**
+     * Accepts parameters as Frame and List of
+     * Instructions declared as global on main class
+     * @param p
+     * @param instructors
+     */
     private void displayData(Frame p, List<Instructor> instructors) {
         String[] columns = {"ID", "Name"};
         Object[][] data = new Object[instructors.size()][2];

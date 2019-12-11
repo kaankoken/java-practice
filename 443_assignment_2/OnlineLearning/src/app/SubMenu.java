@@ -42,7 +42,12 @@ public class SubMenu extends JDialog {
 
         setFields(p);
     }
-
+    /**
+     * Accepts Frame Object as a parameter, and 
+     * sets the location of buttons and labels, 
+     * adds to the panels. Lastly, adds to the main frame
+     * @param p
+     */
     private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 3;
@@ -86,35 +91,57 @@ public class SubMenu extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Returns the list of courses button
+     * @return JButton
+     */
     public JButton listAllCourses() {
         return btnListAllCourses;
     }
-
+    /**
+     * Returns the add course button
+     * @return JButton
+     */
     public JButton addCourse() {
         return btnAddCourse;
     }
-
+    /**
+     * Returns the delete course button
+     * @return JButton
+     */
     public JButton deleteCourse() {
         return btnDeleteCourse;
     }
-
+    /**
+     * Returns the list instructor button
+     * @return JButton
+     */
     public JButton listInstructors() {
         return btnGetInstructors;
     }
-
+    /**
+     * Returns the change premium status button
+     * @return JButton
+     */
     public JButton changePremiumStatus() {
         return btnChangeAccountType;
     }
-
+    /**
+     * Returns the enrolled button
+     * @return JButton
+     */
     public JButton enrolledCourses() {
        return btnEnrolledCourses;
     }
-
+    /**
+     * Returns the logout button
+     * @return JButton
+     */
     public JButton logout() {
         return btnLogout;
     }
 
+    /**Closes the panel */
     public void closePanel() {
         dispose();
     }

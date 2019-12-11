@@ -18,7 +18,13 @@ public class ListCourses extends JDialog {
         panel = new JPanel(new GridBagLayout());
         displayData(p, course);
     }
-
+    /**
+     * Displays the list of courses globally defined.
+     * It accepts parameters as List of Course object
+     * and Frame object
+     * @param p
+     * @param course
+     */
     private void displayData(Frame p, List<Course> course) {
         String[] columns = {"Course Name", "Duration", "Instructor"};
         Object[][] data = new Object[course.size()][3];

@@ -16,7 +16,11 @@ public class DeleteCourse extends JDialog {
     private JTextField courseField;
     private JButton btnDelete;
     private JButton btnCancel;
-
+    /**
+     * Accepts Frame Object as a parameter, and
+     * initially creates the objects inside this classs
+     * @param p
+     */
     public DeleteCourse(Frame p) {
         super(p, "Delete Course", true);
 
@@ -32,7 +36,12 @@ public class DeleteCourse extends JDialog {
         
         setFields(p);
     }
-
+    /**
+     * Accepts Frame Object as a parameter, and 
+     * sets the location of buttons and labels, 
+     * adds to the panels. Lastly, adds to the main frame
+     * @param p
+     */
     private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
@@ -57,23 +66,35 @@ public class DeleteCourse extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Gets the value of written text into coursefield
+     * @return String
+     */
     public String getCourseField() {
         return courseField.getText().trim();
     }
-
+    /**
+     * Set the course field with empty string
+     * @return void
+     */
     public void setCourseField() {
         courseField.setText("");
     }
-
+    /**
+     * Returns the delete button
+     * @return JButton
+     */
     public JButton getBtnDelete() {
         return btnDelete;
     }
-
+    /**
+     * Returns the cancel button
+     * @return JButton
+     */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+    /**Close the panel */
     public void closePanel() {
         dispose();
     }

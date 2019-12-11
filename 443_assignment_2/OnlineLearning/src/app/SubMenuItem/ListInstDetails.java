@@ -16,6 +16,7 @@ public class ListInstDetails extends JDialog {
     private JTextField instField;
     private JLabel instLabel;
     private JPanel bp = new JPanel();
+
     public ListInstDetails(Frame p) {
         super(p, "Instructors Details", true);
         panel = new JPanel(new GridBagLayout());
@@ -38,7 +39,12 @@ public class ListInstDetails extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Accepts parameter as Frame and Instructor object
+     * Displays the details of the instructor.
+     * @param p
+     * @param inst
+     */
     public void displayData(Frame p, Instructor inst) {
        
         String[] columns = {"ID", "Name", "Gender", "Age"};
@@ -64,23 +70,35 @@ public class ListInstDetails extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Returns the Instruction button
+     * @return JButton
+     */
     public JButton getInstButton() {
         return btnInstructor;
     }
-
+    /**
+     * Returns the cancel button
+     * @return JButton
+     */
     public JButton getCancelButton() {
         return btnCancel;
     }
-
+    /**
+     * Returns the id of instructor from the
+     * instructor field
+     * @return int
+     */
     public int getInstructorID() {
         return Integer.parseInt(instField.getText().trim());
     }
-
+    /**Closes the opened panel */
     public void closePanel() {
         dispose();
     }
-
+    /**
+     * Removes the panels to added frame
+     */
     public void setVisibility() {
         getContentPane().remove(panel);
         getContentPane().remove(bp);

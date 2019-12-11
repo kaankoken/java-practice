@@ -16,7 +16,11 @@ public class AddCourse extends JDialog{
     private JLabel courseLabel;
     private JTextField courseField;
     private JLabel headingLabel;
-
+    /**
+     * Accepts Frame Object as a parameter, and
+     * initially creates the objects inside this classs
+     * @param p
+     */
     public AddCourse(Frame p) {
         super(p, "Add Course", true);
         panel = new JPanel(new GridBagLayout());
@@ -31,7 +35,12 @@ public class AddCourse extends JDialog{
         
         setFields(p);
     }
-
+    /**
+     * Accepts Frame Object as a parameter, and 
+     * sets the location of buttons and labels, 
+     * adds to the panels. Lastly, adds to the main frame
+     * @param p
+     */
     private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
@@ -56,23 +65,37 @@ public class AddCourse extends JDialog{
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Gets the value of written text into coursefield
+     * @return String
+     */
     public String getCourseField() {
         return courseField.getText().trim();
     }
-
+    /**
+     * Set the course field with empty string
+     * @return void
+     */
     public void setCourseField() {
         courseField.setText("");
     }
-
+    /**
+     * Returns the add button
+     * @return JButton
+     */
     public JButton getBtnAdd() {
         return btnAdd;
     }
-
+    /**
+     * Returns the cancel button
+     * @return JButton
+     */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+    /**
+     * Closes the panel
+     */
     public void closePanel() {
         dispose();
     }

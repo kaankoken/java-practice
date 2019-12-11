@@ -18,7 +18,13 @@ public class EnrolledCourse extends JDialog{
         panel = new JPanel(new GridBagLayout());
         displayData(p, course);
     }
-
+    /**
+     * Displays the enrolled courses of the person.
+     * It accepts parameters as List of Course object
+     * and Frame object
+     * @param p
+     * @param course
+     */
     private void displayData(Frame p, List<Course> course) {
         String[] columns = {"Course Name", "Duration", "Instructor", "Premium Status"};
         Object[][] data = new Object[course.size()][4];

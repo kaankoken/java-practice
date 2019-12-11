@@ -52,7 +52,12 @@ public class Signup extends JDialog {
         
         setFields(p);
     }
-
+    /**
+     * Accepts Frame Object as a parameter, and 
+     * sets the location of buttons and labels, 
+     * adds to the panels. Lastly, adds to the main frame
+     * @param p
+     */
     private void setFields(Frame p) {
         cs.gridx = 0;
         cs.gridy = 0;
@@ -136,63 +141,105 @@ public class Signup extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-    
+    /**
+     * Returns the signup button
+     * @return JButton
+     */
     public JButton getBtnSignup() {
         return btnSignup;
     }
-
+    /**
+     * Returns the cancel button
+     * @return JButton
+     */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+    /**
+     * Returns the value of written value of name field
+     * @return String
+     */
     public String getName() {
         return nameField.getText().trim();
     }
-    
+    /**
+     * Returns the value of selected value of age field
+     * @return String
+     */
     public String getAge() {
         return ageComboBox.getSelectedItem().toString();
     }
-
+    /**
+     * Returns the value of selected value of gender field
+     * @return String
+     */
     public String getGender() {
         return genderComboBox.getSelectedItem().toString();
     }
-
+    /**
+     * Returns the value of selected value of account type field
+     * @return String
+     */
     public String getAccountType() {
         return typeComboBox.getSelectedItem().toString();
     }
-
+    /**
+     * Returns the value of written value of email field
+     * @return String
+     */
     public String getEmail() {
         return emailField.getText().trim();
     }
-
+    /**
+     * Returns the value of written value of password field
+     * @return String
+     */
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
-
+    /**
+     * Set the name field with empty string
+     * @return void
+     */
     public void setName() {
         nameField.setText("");
     }
-
+    /**
+     * Set the age field with first option
+     * @return void
+     */
     public void setAge() {
         ageComboBox.setSelectedIndex(0);
     }
-
+    /**
+     * Set the gender field with first option
+     * @return void
+     */
     public void setGender() {
         genderComboBox.setSelectedIndex(0);
     }
-
+    /**
+     * Set the account type field with first option
+     * @return void
+     */
     public void setAccountType() {
         typeComboBox.setSelectedIndex(0);
     }
-
+    /**
+     * Set the email field with empty string
+     * @return void
+     */
     public void setEmail() {
         emailField.setText("");
     }
-
+    /**
+     * Set the password field with empty string
+     * @return void
+     */
     public void setPassword() {
         passwordField.setText("");
     }
-
+    /**Closes the panel */
     public void closePanel() {
         dispose();
     }

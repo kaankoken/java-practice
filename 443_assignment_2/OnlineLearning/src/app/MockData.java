@@ -27,6 +27,9 @@ public class MockData<T> {
                     new Instructor(i, "name" + i, 'F', 12 + i),
                     "course" + i,
                     (float) (52.1 + i),
+                    /**random generator allow to create dynamically premium and 
+                     * non premium classes
+                     */
                     this.generateRandomValue(2) == 0 ? false: true
                 ));
             }
@@ -51,7 +54,12 @@ public class MockData<T> {
     public List<T> getData() {
         return temp;
     }
-
+    /**
+     * Creates random values in order to
+     * make variation
+     * @param range
+     * @return
+     */
     private double generateRandomValue(int range) {
         double randomValue = (int) (Math.random() *((range - 0))) + 0;
         return randomValue;

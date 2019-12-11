@@ -33,15 +33,23 @@ public class ChangePremium extends JDialog {
         setResizable(true);
         setLocationRelativeTo(p);
     }
-
+    /**
+     * Returns yes button
+     * @return JButton
+     */
     public JButton getBtnYes() {
         return btnYes;
     }
-
+    /**
+     * Returns no button
+     * @return JButton
+     */
     public JButton getBtnNo() {
         return btnNo;
     }
-
+    /**
+     * Close the panel
+     */
     public void closePanel() {
         dispose();
     }
